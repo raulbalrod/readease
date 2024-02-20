@@ -21,6 +21,6 @@ const bookSchema = new Schema({
   pageCount: { type: Number, min: 0, required: true },
   ebook: { type: String },
   audiobook: { type: String }
-});
+}, { timestamps: true });
 
 export default model('Book', bookSchema);
