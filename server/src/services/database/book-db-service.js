@@ -5,7 +5,7 @@ export async function createBook(data) {
 }
 
 export async function getBookByTitle(title) {
-  return Book.findOne({ title: { $regex: new RegExp(title, 'i') } });
+  return Book.findOne({ title: { $regex: new RegExp(title, "i") } });
 }
 
 export async function getBooks(filters) {
@@ -20,17 +20,17 @@ export async function getBooks(filters) {
   }
 
   let sortOption = {};
-  if (sort === 'az') {
+  if (sort === "az") {
     sortOption = { title: 1 };
-  } else if (sort === 'za') {
+  } else if (sort === "za") {
     sortOption = { title: -1 };
-  } else if (sort === 'pageCountAsc') {
+  } else if (sort === "pageCountAsc") {
     sortOption = { pageCount: 1 };
-  } else if (sort === 'pageCountDesc') {
+  } else if (sort === "pageCountDesc") {
     sortOption = { pageCount: -1 };
-  } else if (sort === 'rateDesc') {
+  } else if (sort === "rateDesc") {
     sortOption = { rating: -1 };
-  } else if (sort === 'rateAsc') {
+  } else if (sort === "rateAsc") {
     sortOption = { rating: 1 };
   }
 

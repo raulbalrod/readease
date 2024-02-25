@@ -3,30 +3,20 @@ import { HttpStatusError } from 'common-errors';
 import jwt from 'jsonwebtoken';
 
 import config from '../config.js';
+import User from '../models/User.js';
 
-export function login(req, res, next){
-       const { username, password } = req.body;
+export async function login(req, res, next) {
+  try {
+    const { username, password } = req.body;
+    const user = await User.findOne({ username });
 
-    const user = findUser(username);
-
-    if(user){
-        console.log(password, user.password);
-        if(bcrypt.compareSync(password, user.password)){
-            const userInfo = { id: user.id, name: user.name };
-            const jwtConfig = { expiresIn: 10 };
-            const token = jwt.sign(userInfo, config.app.secretKey, jwtConfig);
-            return res.send({token});
-        }
+    if (!user || !bcrypt.compareSync(password, user.password)) {
+      throw new HttpStatusError(401, 'Invalid email or password');
     }
 
-    throw new HttpStatusError(401, 'Invalid credentials');
+    const token = jwt.sign({ userId: user._id, role: user.role }, config.app.secretKey);
+    res.send({ token });
+  } catch (error) {
+    next(error);
+  }
 }
-
-
-
-
-
-
-
-
-
