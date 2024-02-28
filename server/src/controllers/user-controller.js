@@ -1,3 +1,4 @@
+import jwt from "jsonwebtoken";
 import {
   addBookToList,
   createUser,
@@ -6,13 +7,20 @@ import {
   removeBookFromList,
 } from "../services/database/user-db-service.js";
 import { encryptPassword } from "../utils/encrypt.js";
+import config from "../config.js";
 
 export async function createUsercontroller(req, res, next) {
   try {
     const body = req.body;
     body.password = await encryptPassword(body.password);
-    const users = await createUser(req.body);
-    return res.status(201).send(users);
+    const user = await createUser(body);
+
+    const token = jwt.sign(
+      { userId: user._id, role: user.role },
+      config.app.secretKey
+    );
+
+    res.status(201).send({ user, token });
   } catch (error) {
     if (error.code === 11000) error.status = 409;
     next(error);
