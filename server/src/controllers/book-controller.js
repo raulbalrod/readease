@@ -54,6 +54,25 @@ export async function getBook(req, res, next) {
   }
 }
 
+export async function updateStatus(req, res, next) {
+  const { title } = req.params;
+  const { status } = req.body;
+
+  try {
+    const book = await getBookByTitle(title);
+
+    if (!book) return res.status(404).send({ message: "Book not found" });
+
+    book.status = status;
+
+    await book.save();
+
+    return res.status(200).send({ message: "Book status updated correctly" });
+  } catch (error) {
+    next(error);
+  }
+}
+
 export async function createBookController(req, res, next) {
   try {
     const body = req.body;
