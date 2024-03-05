@@ -13,7 +13,7 @@ const router = Router();
 
 router.get("/", getAllBooks); // basic && premium [checkToken??]
 router.get("/:title", checkRole, getBook); // basic || premium --- basic && premium
-router.patch("/:title/status", updateStatus); // basic || premium --- basic && premium
+router.patch("/:title/status", updateStatus); // basic && premium [checkToken??]
 router.post("/", isAdmin, createBookController); // admin
 router.patch("/:id", isAdmin, updateBook); // admin
 router.delete("/:id", isAdmin, deleteBookController); // admin

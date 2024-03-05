@@ -9,6 +9,40 @@ import {
 import { encryptPassword } from "../utils/encrypt.js";
 import config from "../config.js";
 
+export async function createBasicUser(req, res, next) {
+  try {
+    const { username, email, password } = req.body;
+    const role = "Basic";
+
+    const user = await createUserWithRole({ username, email, password, role });
+
+    res.status(201).send({ user });
+  } catch (error) {
+    next(error);
+  }
+}
+
+export async function createPremiumUser(req, res, next) {
+  try {
+    const { username, email, password } = req.body;
+    const role = "Premium";
+
+    const user = await createUserWithRole({ username, email, password, role });
+
+    res.status(201).send({ user });
+  } catch (error) {
+    next(error);
+  }
+}
+
+async function createUserWithRole(userData) {
+  userData.password = await encryptPassword(userData.password);
+
+  const user = await createUser(userData);
+
+  return user;
+}
+
 export async function createUsercontroller(req, res, next) {
   try {
     const body = req.body;
