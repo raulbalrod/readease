@@ -6,6 +6,11 @@ export async function createUser(user) {
   return createdUser;
 }
 
+export async function getUserByName(username) {
+  const user = await User.findOne({ username });
+  return user;
+}
+
 export async function addBookToList(userId, bookId) {
   try {
     const user = await User.findById(userId);

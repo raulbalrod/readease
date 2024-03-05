@@ -21,3 +21,25 @@ export function checkToken(req, res, next) {
     throw new HttpStatusError(401, "Invalid token");
   }
 }
+
+export function isAdmin(req, res, next) {
+  const token = req.headers.authorization;
+
+  if (!token) {
+    return res.status(401).send({ message: "Missing token" });
+  }
+
+  jwt.verify(token.split(" ")[1], config.app.secretKey, (err, decoded) => {
+    if (err) {
+      return res.status(401).send({ message: "Invalid token" });
+    }
+
+    if (decoded.role !== "Admin") {
+      return res
+        .status(403)
+        .send({ message: "You are not authorized to access this resource" });
+    }
+
+    next();
+  });
+}
