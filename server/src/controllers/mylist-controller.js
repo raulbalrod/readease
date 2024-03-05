@@ -3,7 +3,7 @@ import {
   getUserBookList,
   getUserIdByUsername,
   removeBookFromList,
-} from "../services/database/user-db-service.js";
+} from "../services/database/mylist-db-service.js";
 
 export async function myBookList(req, res, next) {
   try {

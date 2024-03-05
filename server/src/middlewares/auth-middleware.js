@@ -22,6 +22,31 @@ export function checkToken(req, res, next) {
   }
 }
 
+export function checkTokenToEditUserData(req, res, next) {
+  const { authorization } = req.headers;
+
+  if (!authorization) {
+    return res.status(401).send({ message: "No token provided" });
+  }
+
+  const [_bearer, token] = authorization.split(" ");
+
+  try {
+    const tokenInfo = jwt.verify(token, config.app.secretKey);
+    req.user = tokenInfo;
+
+    if (req.params.id !== req.user.userId) {
+      return res
+        .status(403)
+        .send({ message: "You do not have permission to edit this user" });
+    }
+
+    next();
+  } catch (err) {
+    return res.status(401).send({ message: "Invalid token" });
+  }
+}
+
 export function isAdmin(req, res, next) {
   const token = req.headers.authorization;
 
