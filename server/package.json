@@ -6,6 +6,7 @@
   "main": "src/index.js",
   "scripts": {
     "start": "nodemon src/index.js",
+    "build:docker": "docker build -t api-boilerplate .",
     "compose:tools": "docker-compose -f docker/docker-compose.tools.yml up -d"
   },
   "keywords": [],
