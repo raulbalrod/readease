@@ -43,3 +43,17 @@ export function isAdmin(req, res, next) {
     next();
   });
 }
+
+export function checkRole(req, res, next) {
+  const token = req.headers.authorization;
+  if (!token) return res.status(401).send({ message: "Missing token" });
+
+  jwt.verify(token.split(" ")[1], config.app.secretKey, (err, decoded) => {
+    if (err) {
+      return res.status(401).send({ message: "Invalid token" });
+    }
+
+    req.decoded = decoded;
+    next();
+  });
+}

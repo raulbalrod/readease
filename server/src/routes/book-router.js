@@ -6,12 +6,12 @@ import {
   getBook,
   updateBook,
 } from "../controllers/book-controller.js";
-import { isAdmin } from "../middlewares/auth-middleware.js";
+import { checkRole, isAdmin } from "../middlewares/auth-middleware.js";
 
 const router = Router();
 
-router.get("/", getAllBooks);
-router.get("/:title", getBook);
+router.get("/", getAllBooks); // basic && premium [checkToken??]
+router.get("/:title", checkRole, getBook); // basic || premium --- basic && premium
 router.post("/", isAdmin, createBookController); // admin
 router.patch("/:id", isAdmin, updateBook); // admin
 router.delete("/:id", isAdmin, deleteBookController); // admin

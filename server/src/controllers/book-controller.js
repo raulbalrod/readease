@@ -1,5 +1,13 @@
 import { HttpStatusError } from "common-errors";
-import { createBook, deleteBook, getBookByTitle, getBooks, updateBookById } from "../services/database/book-db-service.js";
+import jwt from "jsonwebtoken";
+import {
+  createBook,
+  deleteBook,
+  getBookByTitle,
+  getBooks,
+  updateBookById,
+} from "../services/database/book-db-service.js";
+import config from "../config.js";
 
 export async function getAllBooks(req, res, next) {
   try {
@@ -15,8 +23,32 @@ export async function getBook(req, res, next) {
   try {
     const title = req.params.title;
     const book = await getBookByTitle(title);
-    if (!book) throw new HttpStatusError(404, 'Book not found');
-    return res.send(book);
+    if (!book) throw new HttpStatusError(404, "Book not found");
+
+    let bookData;
+    const decoded = req.decoded;
+
+    if (decoded.role === "Basic") {
+      bookData = {
+        _id: book._id,
+        title: book.title,
+        subtitle: book.subtitle,
+        description: book.description,
+        categories: book.categories,
+        rating: book.rating,
+        status: book.status,
+        image: book.image,
+        authors: book.authors,
+        editorial: book.editorial,
+        pageCount: book.pageCount,
+      };
+    }
+
+    if (decoded.role === "Premium" || decoded.role === "Admin") {
+      bookData = book;
+    }
+
+    return res.send(bookData);
   } catch (error) {
     next(error);
   }
@@ -44,7 +76,7 @@ export async function updateBook(req, res, next) {
 export async function deleteBookController(req, res, next) {
   try {
     const book = await deleteBook(req.params.id);
-    if (!book) throw new HttpStatusError(404, 'Book not Found');
+    if (!book) throw new HttpStatusError(404, "Book not Found");
     return res.status(200).send(book);
   } catch (error) {
     next(error);

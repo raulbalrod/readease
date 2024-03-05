@@ -9,10 +9,10 @@ import { login } from "../controllers/login-controller.js";
 
 const router = Router();
 
-router.post("/", createUsercontroller);
-router.post("/login", login);
-router.post("/:username/books", myBookList);
-router.post("/:username/books/remove", removeBookFromListController);
-router.get("/:username/books", getUserBookListController);
+router.post("/", createUsercontroller); // all
+router.post("/login", login); // all
+router.post("/:username/books", myBookList); // basic && premium [checkToken??]
+router.post("/:username/books/remove", removeBookFromListController); // basic && premium [checkToken??]
+router.get("/:username/books", getUserBookListController); // basic && premium [checkToken??]
 
 export default router;
