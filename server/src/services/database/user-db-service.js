@@ -6,6 +6,14 @@ export async function createUser(user) {
   return createdUser;
 }
 
+export async function createUserWithRole(userData) {
+  userData.password = await encryptPassword(userData.password);
+
+  const user = await createUser(userData);
+
+  return user;
+}
+
 export async function getUserByName(username) {
   const user = await User.findOne({ username });
   return user;

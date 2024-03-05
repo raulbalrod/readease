@@ -3,12 +3,14 @@ import {
   createBasicUser,
   createPremiumUser,
   createUsercontroller,
-  getUserBookListController,
-  myBookList,
-  removeBookFromListController,
 } from "../controllers/user-controller.js";
 import { login } from "../controllers/login-controller.js";
 import { isAdmin } from "../middlewares/auth-middleware.js";
+import {
+  getUserBookListController,
+  myBookList,
+  removeBookFromListController,
+} from "../controllers/mylist-controller.js";
 
 const router = Router();
 
