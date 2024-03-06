@@ -1,5 +1,4 @@
 import { HttpStatusError } from "common-errors";
-import jwt from "jsonwebtoken";
 import {
   createBook,
   deleteBook,
@@ -7,7 +6,6 @@ import {
   getBooks,
   updateBookById,
 } from "../services/database/book-db-service.js";
-import config from "../config.js";
 
 export async function getAllBooks(req, res, next) {
   try {
