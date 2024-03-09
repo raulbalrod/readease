@@ -1,4 +1,4 @@
-# Proyecto Notas
+# Bookbuddy API REST
 API REST in Nodejs for a bookbuddy project
 
 ## Instalation
