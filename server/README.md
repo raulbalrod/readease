@@ -29,7 +29,7 @@ npm start
 
 4. By default, the app deploy on port 3000. To use the app you can:
     - **Postman** Use the provided [postman collection](./postman/collections) and [postman environment](./postman/environments).
-    - **Deploy** Use the already deployed [api](https://bookbuddy-v7ra.onrender.com)
+    - **Deploy** Use the already deployed [API](https://bookbuddy-v7ra.onrender.com) and use the different API endpoints
 
 ## Architecture
 
