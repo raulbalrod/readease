@@ -1,4 +1,5 @@
 import Book from "../../models/Book.js";
+import { applyFilters } from "../../utils/filters.js";
 
 export async function createBook(data) {
   return Book.create(data);
@@ -9,34 +10,10 @@ export async function getBookByTitle(title) {
 }
 
 export async function getBooks(filters) {
-  const { categorie, status, sort } = filters;
-  let query = {};
-
-  if (categorie) {
-    query.categories = categorie;
-  }
-  if (status) {
-    query.status = status;
-  }
-
-  let sortOption = {};
-  if (sort === "az") {
-    sortOption = { title: 1 };
-  } else if (sort === "za") {
-    sortOption = { title: -1 };
-  } else if (sort === "pageCountAsc") {
-    sortOption = { pageCount: 1 };
-  } else if (sort === "pageCountDesc") {
-    sortOption = { pageCount: -1 };
-  } else if (sort === "rateDesc") {
-    sortOption = { rating: -1 };
-  } else if (sort === "rateAsc") {
-    sortOption = { rating: 1 };
-  }
-
-  return Book.find(query).sort(sortOption);
+  const query = applyFilters(filters);
+  const { sortOption, ...filterQuery } = query;
+  return Book.find(filterQuery).sort(sortOption);
 }
-
 export async function deleteBook(id) {
   return Book.findByIdAndDelete(id);
 }

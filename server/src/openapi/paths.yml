@@ -2,5 +2,5 @@
   get:
     summary: pong
     responses:
-      '200':
+      "200":
         description: ping/pong
