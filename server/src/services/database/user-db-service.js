@@ -23,3 +23,20 @@ export async function getUserByName(username) {
 export async function deleteUser(id) {
   return User.findByIdAndDelete(id);
 }
+
+export async function editUser(id, username, email) {
+  try {
+    const user = await User.findById(id);
+
+    if (!user) throw new HttpStatusError(404, "User not Found");
+
+    if (username) user.username = username;
+    if (email) user.email = email;
+
+    await user.save();
+
+    return user;
+  } catch (error) {
+    throw error;
+  }
+}

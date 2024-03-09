@@ -3,10 +3,10 @@ import {
   createUser,
   createUserWithRole,
   deleteUser,
+  editUser,
 } from "../services/database/user-db-service.js";
 import { encryptPassword } from "../utils/encrypt.js";
 import config from "../config.js";
-import User from "../models/User.js";
 
 export async function createBasicUser(req, res, next) {
   try {
@@ -34,7 +34,7 @@ export async function createPremiumUser(req, res, next) {
   }
 }
 
-export async function createUsercontroller(req, res, next) {
+export async function createUserController(req, res, next) {
   try {
     const body = req.body;
     body.password = await encryptPassword(body.password);
@@ -51,23 +51,16 @@ export async function createUsercontroller(req, res, next) {
   }
 }
 
-export async function editUser(req, res, next) {
+export async function editUserController(req, res, next) {
   const { id } = req.params;
   const { username, email } = req.body;
 
   try {
-    const user = await User.findById(id);
+    const updatedUser = await editUser(id, username, email);
 
-    if (!user) {
-      return res.status(404).json({ message: "User not found" });
-    }
-
-    if (username) user.username = username;
-    if (email) user.email = email;
-
-    await user.save();
-
-    res.status(200).send({ message: "Successfully updated user", user });
+    res
+      .status(200)
+      .send({ message: "Successfully updated user", user: updatedUser });
   } catch (error) {
     next(error);
   }
@@ -76,8 +69,10 @@ export async function editUser(req, res, next) {
 export async function deleteUserController(req, res, next) {
   try {
     const user = await deleteUser(req.params.id);
-    if (!user) throw new HttpStatusError(404, "Book not Found");
-    return res.status(200).send(user);
+    if (!user) throw new HttpStatusError(404, "User not Found");
+    return res
+      .status(200)
+      .send(`Successfully deleted ${user.username} whit id ${user.id}`);
   } catch (error) {
     next(error);
   }
