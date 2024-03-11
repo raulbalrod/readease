@@ -1,0 +1,1035 @@
+{
+	"info": {
+		"_postman_id": "c8b59bbd-3081-4df5-b119-e9e5f2818a58",
+		"name": "Testing Bookbuddy",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31433801"
+	},
+	"item": [
+		{
+			"name": "Books",
+			"item": [
+				{
+					"name": "Add a book",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"pm.test(\"Response has title, subtitle, description, categories, rating, status, image, authors, editorial, pageCount, ebook, audiobook, _id, createdAt, updatedAt, __v properties\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('title');",
+									"    pm.expect(jsonData).to.have.property('subtitle');",
+									"    pm.expect(jsonData).to.have.property('description');",
+									"    pm.expect(jsonData).to.have.property('categories');",
+									"    pm.expect(jsonData).to.have.property('rating');",
+									"    pm.expect(jsonData).to.have.property('status');",
+									"    pm.expect(jsonData).to.have.property('image');",
+									"    pm.expect(jsonData).to.have.property('authors');",
+									"    pm.expect(jsonData).to.have.property('editorial');",
+									"    pm.expect(jsonData).to.have.property('pageCount');",
+									"    pm.expect(jsonData).to.have.property('ebook');",
+									"    pm.expect(jsonData).to.have.property('audiobook');",
+									"    pm.expect(jsonData).to.have.property('_id');",
+									"    pm.expect(jsonData).to.have.property('createdAt');",
+									"    pm.expect(jsonData).to.have.property('updatedAt');",
+									"    pm.expect(jsonData).to.have.property('__v');",
+									"});",
+									"",
+									"pm.test(\"Title is a non-empty string\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData.title).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Title should not be empty\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Categories array should not be empty\", function () {",
+									"  const responseData = pm.response.json();",
+									"",
+									"  pm.expect(responseData).to.be.an('object');",
+									"  pm.expect(responseData.categories).to.be.an('array').and.to.have.length.above(0, \"Categories array should not be empty\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Image object contains the frontImage property\", function () {",
+									"  const responseData = pm.response.json();",
+									"  ",
+									"  pm.expect(responseData.image).to.exist;",
+									"  pm.expect(responseData.image.frontImage).to.exist;",
+									"});",
+									"",
+									"",
+									"pm.test(\"Authors object contains name, img, and biography properties\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData.authors).to.exist.and.to.be.an('object');",
+									"    pm.expect(responseData.authors).to.have.property('name');",
+									"    pm.expect(responseData.authors).to.have.property('img');",
+									"    pm.expect(responseData.authors).to.have.property('biography');",
+									"});",
+									"",
+									"",
+									"pm.test(\"Page count is a non-negative integer\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData.pageCount).to.be.a('number');",
+									"    pm.expect(responseData.pageCount).to.be.at.least(0, \"Page count should be a non-negative integer\");",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"23\",\r\n    \"subtitle\": \"Explorando las Profundidades Desconocidas: Aventuras Subterráneas en Busca de Maravillas Ocultas\",\r\n    \"description\": \"'Viaje al centro de la Tierra' narra la emocionante aventura del profesor Otto Lidenbrock y su sobrino Axel mientras exploran las entrañas de la Tierra en una expedición subterránea. La novela de Julio Verne es un clásico de la literatura de ciencia ficción y aventuras, explorando mundos desconocidos bajo la superficie terrestre.\",\r\n    \"categories\": [\"Ficción\", \"Aventura\"],\r\n    \"rating\": 4.3,\r\n    \"image\": {\r\n      \"frontImage\": \"https://m.media-amazon.com/images/I/91zIwQ1iI1L._SL1500_.jpg\"\r\n    },\r\n    \"authors\": {\r\n      \"name\": \"Julio Verne\",\r\n      \"img\": \"https://m.media-amazon.com/images/I/51kDXbS1pnL._SY600_.jpg\",\r\n      \"biography\": \"Julio Verne fue un influyente escritor francés considerado uno de los padres fundadores de la ciencia ficción. A lo largo de su carrera, Verne escribió numerosas novelas que anticipaban avances tecnológicos y exploraban mundos fantásticos, siendo 'Viaje al centro de la Tierra' una de sus obras más conocidas.\"\r\n    },\r\n    \"editorial\": \"Austral\",\r\n    \"pageCount\": 320,\r\n    \"ebook\": \"https://raw.githack.com/bookbudy/books/main/ebooks/viaje-al-centro-de-la-tierra-jules-verne.epub\",\r\n    \"audiobook\": \"https://raw.githack.com/bookbudy/books/main/audiobooks/viaje-al-centro-de-la-tierra-jules-verne.mp3\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/books",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"books"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all books",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status code is 200\", function () {\r",
+									"    pm.expect(pm.response.code).to.equal(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"FrontImage should not be empty and exist for each book\", function () {\r",
+									"    pm.expect(pm.response.json()).to.be.an('array').and.to.not.be.empty;\r",
+									"    pm.response.json().forEach(function(book) {\r",
+									"        pm.expect(book.image.frontImage).to.exist.and.to.not.be.empty;\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Authors' name, img, and biography are not empty for each book\", function () {\r",
+									"    pm.expect(pm.response.json()).to.be.an('array').and.to.not.be.empty;\r",
+									"    pm.response.json().forEach(function(book) {\r",
+									"        pm.expect(book.authors.name).to.not.be.empty;\r",
+									"        pm.expect(book.authors.img).to.not.be.empty;\r",
+									"        pm.expect(book.authors.biography).to.not.be.empty;\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Page count is a non-negative integer for each book\", function () {\r",
+									"    pm.expect(pm.response.json()).to.be.an('array').and.to.not.be.empty;\r",
+									"    pm.response.json().forEach(function(book) {\r",
+									"        pm.expect(book.pageCount).to.be.a('number').and.to.be.at.least(0);\r",
+									"    });\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/books",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"books"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get book by title",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response has image, authors, and categories properties\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.have.property(\"image\");\r",
+									"    pm.expect(jsonData).to.have.property(\"authors\");\r",
+									"    pm.expect(jsonData).to.have.property(\"categories\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content type is application/json\", function () {\r",
+									"  pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Response has the required fields\", function () {\r",
+									"    const responseData = pm.response.json();\r",
+									"    \r",
+									"    pm.expect(responseData).to.be.an('object');\r",
+									"    pm.expect(responseData).to.include.all.keys('title', 'subtitle', 'description', 'rating', 'editorial', 'pageCount', 'createdAt', 'updatedAt');\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"FrontImage should not be an empty string\", function () {\r",
+									"    const responseData = pm.response.json();\r",
+									"    \r",
+									"    pm.expect(responseData.image.frontImage).to.exist.and.to.be.a('string').and.to.have.lengthOf.at.least(1, \"FrontImage should not be empty\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Categories is an array with at least one element\", function () {\r",
+									"    const responseData = pm.response.json();\r",
+									"    \r",
+									"    pm.expect(responseData.categories).to.be.an('array').and.to.have.lengthOf.at.least(1);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/books/23",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"books",
+								"23"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit data of book",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response is an object with image, authors, _id, title, subtitle, description, categories, rating, status, editorial, pageCount, ebook, audiobook, createdAt, updatedAt, and __v properties\", function () {\r",
+									"    pm.expect(pm.response.json()).to.be.an('object').that.has.all.keys('image', 'authors', '_id', 'title', 'subtitle', 'description', 'categories', 'rating', 'status', 'editorial', 'pageCount', 'ebook', 'audiobook', 'createdAt', 'updatedAt', '__v');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content type is application/json\", function () {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Image frontImage should not be empty\", function () {\r",
+									"    const responseData = pm.response.json();\r",
+									"    \r",
+									"    pm.expect(responseData).to.be.an('object');\r",
+									"    pm.expect(responseData.image.frontImage).to.exist.and.to.not.be.empty;\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Authors name, img, and biography are present and not empty\", function () {\r",
+									"    const responseData = pm.response.json();\r",
+									"    \r",
+									"    pm.expect(responseData).to.be.an('object');\r",
+									"    pm.expect(responseData.authors.name).to.exist.and.to.not.be.empty;\r",
+									"    pm.expect(responseData.authors.img).to.exist.and.to.not.be.empty;\r",
+									"    pm.expect(responseData.authors.biography).to.exist.and.to.not.be.empty;\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Categories is an array with at least one element\", function () {\r",
+									"  const responseData = pm.response.json();\r",
+									"  \r",
+									"  pm.expect(responseData).to.be.an('object');\r",
+									"  pm.expect(responseData.categories).to.be.an('array').and.to.have.lengthOf.at.least(1);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Rating is a number between 0 and 5\", function () {\r",
+									"  const responseData = pm.response.json();\r",
+									"\r",
+									"  pm.expect(responseData).to.be.an('object');\r",
+									"  pm.expect(responseData.rating).to.be.a('number');\r",
+									"  pm.expect(responseData.rating).to.be.within(0, 5);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"2333\",\r\n    \"subtitle\": \"Explorando las Profundidades Desconocidas: Aventuras Subterráneas en Busca de Maravillas Ocultas\",\r\n    \"description\": \"'Viaje al centro de la Tierra' narra la emocionante aventura del profesor Otto Lidenbrock y su sobrino Axel mientras exploran las entrañas de la Tierra en una expedición subterránea. La novela de Julio Verne es un clásico de la literatura de ciencia ficción y aventuras, explorando mundos desconocidos bajo la superficie terrestre.\",\r\n    \"categories\": [\r\n        \"Ficción\",\r\n        \"Aventura\"\r\n    ],\r\n    \"rating\": 4.3,\r\n    \"status\": \"Futuras lecturas\",\r\n    \"image\": {\r\n        \"frontImage\": \"https://m.media-amazon.com/images/I/91zIwQ1iI1L._SL1500_.jpg\"\r\n    },\r\n    \"authors\": {\r\n        \"name\": \"Julio Verne\",\r\n        \"img\": \"https://m.media-amazon.com/images/I/51kDXbS1pnL._SY600_.jpg\",\r\n        \"biography\": \"Julio Verne fue un influyente escritor francés considerado uno de los padres fundadores de la ciencia ficción. A lo largo de su carrera, Verne escribió numerosas novelas que anticipaban avances tecnológicos y exploraban mundos fantásticos, siendo 'Viaje al centro de la Tierra' una de sus obras más conocidas.\"\r\n    },\r\n    \"editorial\": \"Austral\",\r\n    \"pageCount\": 320,\r\n    \"ebook\": \"https://raw.githack.com/bookbudy/books/main/ebooks/viaje-al-centro-de-la-tierra-jules-verne.epub\",\r\n    \"audiobook\": \"https://raw.githack.com/bookbudy/books/main/audiobooks/viaje-al-centro-de-la-tierra-jules-verne.mp3\",\r\n    \"_id\": \"65eecc8d08947cde3031bba7\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/books/65eed7ae09a8f403ead0d9a8",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"books",
+								"65eed7ae09a8f403ead0d9a8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a book",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"pm.test(\"Response status code is 200\", function () {\r",
+									"  pm.expect(pm.response.code).to.equal(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"FrontImage is a non-empty string\", function () {\r",
+									"  const responseData = pm.response.json();\r",
+									"  \r",
+									"  pm.expect(responseData).to.be.an('object');\r",
+									"  pm.expect(responseData.image.frontImage).to.be.a('string').and.to.have.lengthOf.at.least(1, \"FrontImage should not be empty\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Name in authors is a non-empty string\", function () {\r",
+									"  const responseData = pm.response.json();\r",
+									"  \r",
+									"  pm.expect(responseData).to.be.an('object');\r",
+									"  pm.expect(responseData.authors.name).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Name should not be empty\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Categories is an array with at least one element\", function () {\r",
+									"    const responseData = pm.response.json();\r",
+									"    \r",
+									"    pm.expect(responseData).to.be.an('object');\r",
+									"    pm.expect(responseData.categories).to.be.an('array').and.to.have.lengthOf.at.least(1);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Response Content-Type is application/json\", function () {\r",
+									"  pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Authors object is present and contains expected fields\", function () {\r",
+									"    const responseData = pm.response.json();\r",
+									"    \r",
+									"    pm.expect(responseData).to.be.an('object');\r",
+									"    pm.expect(responseData.authors).to.exist;\r",
+									"    pm.expect(responseData.authors).to.have.property('name');\r",
+									"    pm.expect(responseData.authors).to.have.property('img');\r",
+									"    pm.expect(responseData.authors).to.have.property('biography');\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Categories array contains only non-empty strings\", function () {\r",
+									"    const responseData = pm.response.json();\r",
+									"    \r",
+									"    pm.expect(responseData.categories).to.be.an('array');\r",
+									"    responseData.categories.forEach(function(category) {\r",
+									"        pm.expect(category).to.be.a('string').and.to.have.lengthOf.at.least(1);\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Title and subtitle must be non-empty strings\", function () {\r",
+									"    const responseData = pm.response.json();\r",
+									"\r",
+									"    pm.expect(responseData).to.be.an('object');\r",
+									"    pm.expect(responseData.title).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Title should not be empty\");\r",
+									"    pm.expect(responseData.subtitle).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Subtitle should not be empty\");\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/books/65eed7ae09a8f403ead0d9a8",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"books",
+								"65eed7ae09a8f403ead0d9a8"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Create user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"pm.test(\"Response has a user object with specific properties\", function () {",
+									"    var user = pm.response.json().user;",
+									"    pm.expect(user).to.be.an('object');",
+									"    pm.expect(user).to.have.property('username');",
+									"    pm.expect(user).to.have.property('email');",
+									"    pm.expect(user).to.have.property('role');",
+									"    pm.expect(user).to.have.property('bookList');",
+									"    pm.expect(user).to.have.property('_id');",
+									"    pm.expect(user).to.have.property('__v');",
+									"});",
+									"",
+									"pm.test(\"Response has a token property\", function () {",
+									"    pm.expect(pm.response.json()).to.have.property('token');",
+									"});",
+									"",
+									"pm.test(\"Response Content-Type is application/json\", function () {",
+									"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
+									"});",
+									"",
+									"pm.test(\"BookList is an array\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData.user.bookList).to.be.an('array');",
+									"});",
+									"",
+									"",
+									"pm.test(\"Token is a non-empty string\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData.token).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Token should not be empty\");",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"ayoze\",\r\n  \"email\": \"ayoze@example.com\",\r\n  \"password\": \"1234\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create a basic user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"pm.test(\"Response status code is 500\", function () {\r",
+									"  pm.expect(pm.response.code).to.equal(500);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Response has the required fields - status and message\", function () {\r",
+									"    const responseData = pm.response.json();\r",
+									"    \r",
+									"    pm.expect(responseData).to.be.an('object');\r",
+									"    pm.expect(responseData.status).to.exist;\r",
+									"    pm.expect(responseData.message).to.exist;\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Status is a non-negative integer\", function () {\r",
+									"  const responseData = pm.response.json();\r",
+									"  \r",
+									"  pm.expect(responseData.status).to.be.a('number');\r",
+									"  pm.expect(responseData.status).to.be.at.least(0);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Message is a non-empty string\", function () {\r",
+									"  const responseData = pm.response.json();\r",
+									"\r",
+									"  pm.expect(responseData.message).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Message should not be empty\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Content-Type is application/json\", function () {\r",
+									"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"manuel paco\",\r\n  \"email\": \"manuelpaco@example.com\",\r\n  \"password\": \"1234\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users/basicUser",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"basicUser"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create a premium user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"pm.test(\"Response status code is 201\", function () {\r",
+									"  pm.expect(pm.response.to.have.status(201));\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Email is in a valid format\", function () {\r",
+									"    const responseData = pm.response.json();\r",
+									"    \r",
+									"    pm.expect(responseData).to.be.an('object');\r",
+									"    pm.expect(responseData.user.email).to.match(/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/, \"Email is not in a valid format\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Password meets the required criteria\", function () {\r",
+									"    const responseData = pm.response.json();\r",
+									"\r",
+									"    pm.expect(responseData.user.password).to.be.a('string');\r",
+									"    pm.expect(responseData.user.password).to.have.lengthOf.at.least(8, \"Password should be at least 8 characters long\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"BookList array is present and empty\", function () {\r",
+									"    const responseData = pm.response.json();\r",
+									"    \r",
+									"    pm.expect(responseData).to.be.an('object');\r",
+									"    pm.expect(responseData.user.bookList).to.exist.and.to.be.an('array').that.is.empty;\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"valorate\",\r\n  \"email\": \"valorate@example.com\",\r\n  \"password\": \"1234\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users/premiumUser",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"premiumUser"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all users",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"pm.test(\"Response status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Response has the required fields\", function () {\r",
+									"    const responseData = pm.response.json();\r",
+									"    \r",
+									"    pm.expect(responseData).to.be.an('array');\r",
+									"    responseData.forEach(user => {\r",
+									"        pm.expect(user).to.be.an('object');\r",
+									"        pm.expect(user._id).to.exist;\r",
+									"        pm.expect(user.username).to.exist;\r",
+									"        pm.expect(user.email).to.exist;\r",
+									"        pm.expect(user.role).to.exist;\r",
+									"        pm.expect(user.bookList).to.exist;\r",
+									"        pm.expect(user.__v).to.exist;\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"BookList array is present and contains expected number of elements\", function () {\r",
+									"    const responseData = pm.response.json();\r",
+									"    \r",
+									"    pm.expect(responseData).to.be.an('array');\r",
+									"    pm.expect(responseData[0].bookList).to.exist;\r",
+									"    pm.expect(responseData[0].bookList).to.be.an('array');\r",
+									"    pm.expect(responseData[0].bookList).to.have.lengthOf.at.least(0);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Username and email must be non-empty strings\", function () {\r",
+									"    const responseData = pm.response.json();\r",
+									"    \r",
+									"    pm.expect(responseData).to.be.an('array');\r",
+									"    \r",
+									"    responseData.forEach(function(user) {\r",
+									"        pm.expect(user.username).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Username should not be empty\");\r",
+									"        pm.expect(user.email).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Email should not be empty\");\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/users",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit user info",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"pm.test(\"Response status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Email is in a valid format\", function () {\r",
+									"    const responseData = pm.response.json();\r",
+									"    \r",
+									"    pm.expect(responseData).to.be.an('object');\r",
+									"    pm.expect(responseData.user.email).to.be.a('string').and.to.match(/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/, \"Email should be in a valid format\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"BookList array is present and empty\", function () {\r",
+									"    const responseData = pm.response.json();\r",
+									"    \r",
+									"    pm.expect(responseData).to.have.property(\"user\");\r",
+									"    pm.expect(responseData.user.bookList).to.be.an('array').that.is.empty;\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"raulbalrod\",\r\n    \"email\": \"raulbalrod@example.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users/65e8b0f2bc2f8a8f50f75414",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"65e8b0f2bc2f8a8f50f75414"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/users/65eed44109a8f403ead0d988",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"65eed44109a8f403ead0d988"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "MyList",
+			"item": [
+				{
+					"name": "Add book to myList",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"bookId\": \"65e8b49f86c68e5f2c3c4d67\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users/raulbalrod/books",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"raulbalrod",
+								"books"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get booklist for user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/users/raulbalrod/books",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"raulbalrod",
+								"books"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove book from myList",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"bookId\": \"65e8b48286c68e5f2c3c4d65\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users/raulbalrod/books/remove",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"raulbalrod",
+								"books",
+								"remove"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Login user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let jsonResponse = pm.response.json();\r",
+							"\r",
+							"let token = jsonResponse.token;\r",
+							"\r",
+							"pm.globals.set(\"token\", token);\r",
+							"\r",
+							"pm.test(\"Response status code is 200\", function () {\r",
+							"    pm.expect(pm.response.code).to.equal(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Content-Type header is application/json\", function () {\r",
+							"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response has the required field 'token'\", function () {\r",
+							"  const responseData = pm.response.json();\r",
+							"  \r",
+							"  pm.expect(responseData).to.be.an('object');\r",
+							"  pm.expect(responseData.token).to.exist;\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Token is a non-empty string\", function () {\r",
+							"  const responseData = pm.response.json();\r",
+							"  \r",
+							"  pm.expect(responseData.token).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Token should not be empty\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Verify that the token is stored in the global variable 'token'\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData.token).to.exist;\r",
+							"    pm.globals.set(\"token\", responseData.token); // Store the token in the global variable\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"raulbalrod\",\r\n    \"password\": \"1234\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/users/login",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"users",
+						"login"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
