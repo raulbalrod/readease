@@ -53,15 +53,6 @@ export async function createUserController(req, res, next) {
   }
 }
 
-export async function getUserMe(req, res, next) {
-  try {
-    const user = await getUserByName(req.user.username);
-    return res.send(user);
-  } catch (error) {
-    next(error);
-  }
-}
-
 export async function getUsersController(req, res, next) {
   try {
     const users = await getUsers(req.query);

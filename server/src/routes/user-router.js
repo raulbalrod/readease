@@ -5,7 +5,6 @@ import {
   createUserController,
   deleteUserController,
   editUserController,
-  getUserMe,
   getUsersController,
 } from "../controllers/user-controller.js";
 import { login } from "../controllers/login-controller.js";
@@ -26,7 +25,6 @@ router.post("/", isAdmin, createUserController); // admin
 router.post("/basicUser", createBasicUser); // all
 router.post("/premiumUser", createPremiumUser); // all
 router.get("/", isAdmin, getUsersController); // admin
-router.get("/:name", isAdmin, getUserMe); // admin
 router.patch("/:id", checkTokenToEditUserData, editUserController); // own user
 router.delete("/:id", isAdmin, deleteUserController); // admin
 
