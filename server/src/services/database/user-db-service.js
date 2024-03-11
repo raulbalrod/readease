@@ -20,6 +20,20 @@ export async function getUserByName(username) {
   return user;
 }
 
+export async function getUsers(filters) {
+  const { name } = filters;
+  const query = {
+    username: name ? new RegExp(name, "i") : undefined,
+  };
+  const cleanedQuery = Object.fromEntries(
+    Object.entries(query).filter(([_, a]) => a !== undefined)
+  );
+
+  const users = await User.find(cleanedQuery).select({ password: 0 });
+
+  return users;
+}
+
 export async function deleteUser(id) {
   return User.findByIdAndDelete(id);
 }

@@ -4,6 +4,8 @@ import {
   createUserWithRole,
   deleteUser,
   editUser,
+  getUserByName,
+  getUsers,
 } from "../services/database/user-db-service.js";
 import { encryptPassword } from "../utils/encrypt.js";
 import config from "../config.js";
@@ -46,6 +48,24 @@ export async function createUserController(req, res, next) {
     );
 
     res.status(201).send({ user, token });
+  } catch (error) {
+    next(error);
+  }
+}
+
+export async function getUserMe(req, res, next) {
+  try {
+    const user = await getUserByName(req.user.username);
+    return res.send(user);
+  } catch (error) {
+    next(error);
+  }
+}
+
+export async function getUsersController(req, res, next) {
+  try {
+    const users = await getUsers(req.query);
+    return res.send(users);
   } catch (error) {
     next(error);
   }
