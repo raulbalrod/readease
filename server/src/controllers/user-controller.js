@@ -4,7 +4,6 @@ import {
   createUserWithRole,
   deleteUser,
   editUser,
-  getUserByName,
   getUsers,
 } from "../services/database/user-db-service.js";
 import { encryptPassword } from "../utils/encrypt.js";

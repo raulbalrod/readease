@@ -15,6 +15,11 @@ export async function createUserWithRole(userData) {
   return user;
 }
 
+export async function getUserByName(username) {
+  const user = await User.findOne({ username });
+  return user;
+}
+
 export async function getUsers(filters) {
   const { name } = filters;
   const query = {
