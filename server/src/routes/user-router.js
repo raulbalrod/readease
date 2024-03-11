@@ -9,6 +9,7 @@ import {
 } from "../controllers/user-controller.js";
 import { login } from "../controllers/login-controller.js";
 import {
+  checkToken,
   checkTokenToEditUserData,
   isAdmin,
 } from "../middlewares/auth-middleware.js";
@@ -28,8 +29,12 @@ router.get("/", isAdmin, getUsersController); // admin
 router.patch("/:id", checkTokenToEditUserData, editUserController); // own user
 router.delete("/:id", isAdmin, deleteUserController); // admin
 
-router.post("/:username/books", myBookList); // basic && premium [checkToken??]
-router.get("/:username/books", getUserBookListController); // basic && premium [checkToken??]
-router.post("/:username/books/remove", removeBookFromListController); // basic && premium [checkToken??]
+router.post("/:username/books", checkToken, myBookList); // basic && premium [checkToken??]
+router.get("/:username/books", checkToken, getUserBookListController); // basic && premium [checkToken??]
+router.post(
+  "/:username/books/remove",
+  checkToken,
+  removeBookFromListController
+); // basic && premium [checkToken??]
 
 export default router;

@@ -160,6 +160,16 @@
 						}
 					],
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -872,6 +882,16 @@
 				{
 					"name": "Add book to myList",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
@@ -929,11 +949,21 @@
 				{
 					"name": "Remove book from myList",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"bookId\": \"65e8b48286c68e5f2c3c4d65\"\r\n}",
+							"raw": "{\r\n    \"bookId\": \"65e8b49f86c68e5f2c3c4d67\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
