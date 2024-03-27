@@ -2,7 +2,7 @@ import { HttpStatusError } from "common-errors";
 import {
   createBook,
   deleteBook,
-  getBookByTitle,
+  getBookById,
   getBooks,
   updateBookById,
 } from "../services/database/book-db-service.js";
@@ -19,8 +19,8 @@ export async function getAllBooks(req, res, next) {
 
 export async function getBook(req, res, next) {
   try {
-    const title = req.params.title;
-    const book = await getBookByTitle(title);
+    const id = req.params.id;
+    const book = await getBookById(id);
     if (!book) throw new HttpStatusError(404, "Book not found");
 
     let bookData;
@@ -53,11 +53,11 @@ export async function getBook(req, res, next) {
 }
 
 export async function updateStatus(req, res, next) {
-  const { title } = req.params;
+  const id = req.params.id;
   const { status } = req.body;
 
   try {
-    const book = await getBookByTitle(title);
+    const book = await getBookById(id);
 
     if (!book) return res.status(404).send({ message: "Book not found" });
 

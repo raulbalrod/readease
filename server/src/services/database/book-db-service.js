@@ -5,8 +5,8 @@ export async function createBook(data) {
   return Book.create(data);
 }
 
-export async function getBookByTitle(title) {
-  return Book.findOne({ title: { $regex: new RegExp(title, "i") } });
+export async function getBookById(id) {
+  return Book.findOne(id);
 }
 
 export async function getBooks(filters) {
