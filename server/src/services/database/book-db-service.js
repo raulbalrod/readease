@@ -14,6 +14,7 @@ export async function getBooks(filters) {
   const { sortOption, ...filterQuery } = query;
   return Book.find(filterQuery).sort(sortOption);
 }
+
 export async function deleteBook(id) {
   return Book.findByIdAndDelete(id);
 }
