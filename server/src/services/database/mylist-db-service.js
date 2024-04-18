@@ -26,27 +26,38 @@ export async function addBookToList(userId, bookId) {
   }
 }
 
+export async function updateBookStatus(userId, bookId, newStatus) {
+  try {
+    const updateResult = await User.findOneAndUpdate(
+      { _id: userId, "bookList._id": bookId },
+      { $set: { "bookList.$.personalStatus": newStatus } },
+      { new: true }
+    );
+
+    if (!updateResult) return null;
+    return updateResult;
+  } catch (error) {
+    console.error("Error updating book status:", error);
+    throw error;
+  }
+}
+
 export async function removeBookFromList(userId, bookId) {
   try {
-    const user = await User.findById(userId);
-    if (!user) {
-      return { status: 404, message: "User not found" };
+    const updateResult = await User.findOneAndUpdate(
+      { _id: userId },
+      { $pull: { bookList: { _id: bookId } } },
+      { new: true }
+    );
+
+    if (!updateResult) {
+      return { status: 404, message: "User not found or book not in list" };
     }
 
-    const bookIndex = user.bookList.indexOf(bookId);
-    if (bookIndex !== -1) {
-      user.bookList.splice(bookIndex, 1);
-      await user.save();
-      return {
-        status: 200,
-        message: "Book successfully removed from the user's list",
-      };
-    } else {
-      return {
-        status: 400,
-        message: "The book is not in the user's list",
-      };
-    }
+    return {
+      status: 200,
+      message: "Book successfully removed from the user's list",
+    };
   } catch (error) {
     console.error("Error in the service while removing the book:", error);
     throw error;

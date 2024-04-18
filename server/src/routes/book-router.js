@@ -5,7 +5,6 @@ import {
   getAllBooks,
   getBook,
   updateBook,
-  updateStatus,
 } from "../controllers/book-controller.js";
 import {
   checkRole,
@@ -17,7 +16,6 @@ const router = Router();
 
 router.get("/", checkToken, getAllBooks); // basic && premium [checkToken??]
 router.get("/:id", checkRole, getBook); // basic || premium --- basic && premium
-router.patch("/:id/status", checkToken, updateStatus); // basic && premium [checkToken??]
 router.post("/", isAdmin, createBookController); // admin
 router.patch("/:id", isAdmin, updateBook); // admin
 router.delete("/:id", isAdmin, deleteBookController); // admin

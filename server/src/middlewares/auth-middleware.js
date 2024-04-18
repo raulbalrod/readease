@@ -24,12 +24,12 @@ export function checkToken(req, res, next) {
   verifyToken(req, res, next);
 }
 
-export function checkTokenToEditUserData(req, res, next) {
+export function checkTokenOwnUser(req, res, next) {
   verifyToken(req, res, () => {
     if (req.params.id !== req.user.userId) {
       return res
         .status(403)
-        .send({ message: "You do not have permission to edit this user" });
+        .send({ message: "You do not have permission to edit that" });
     }
     next();
   });
