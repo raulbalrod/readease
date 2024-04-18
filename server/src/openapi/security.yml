@@ -1,7 +1,0 @@
-apiKey:
-  type: apiKey
-  name: Authorization
-  in: header
-bearerAuth:
-  type: http
-  scheme: bearer

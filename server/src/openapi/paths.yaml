@@ -1,0 +1,218 @@
+/v1/users/login:
+  post:
+    summary: Sign in
+    description: Allows a user to login to the application.
+    tags:
+      - Sign in
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/LoginInput"
+          example:
+            username: "raulbalrod"
+            password: "1234"
+
+    responses:
+      "200":
+        description: Successful login
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                token:
+                  type: string
+      "401":
+        description: Invalid credentials
+        content:
+          application/json:
+            example:
+              message: "Invalid username or password"
+
+/v1/users:
+  post:
+    summary: Create a new user
+    description: Allow create a new user
+    tags:
+      - Create Account
+    security:
+      - JWT: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/UserInput"
+          example:
+            username: "manuel paco"
+            email: "manuelpaco@example.com"
+            password: "1234"
+    responses:
+      "201":
+        description: User created successfully
+        schema:
+          $ref: "#/components/schemas/UserWithToken"
+      "401":
+        description: Invalid token
+      "500":
+        description: Server Error
+
+  get:
+    summary: Retrieve a list of users
+    description: Returns a list of users, optionally filtered by name.
+    tags:
+      - Users
+    security:
+      - JWT: []
+    parameters:
+      - in: query
+        name: name
+        schema:
+          type: string
+        description: Name filter for the users.
+        required: false
+    responses:
+      "200":
+        description: A JSON array of users
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: "#/components/schemas/User"
+      "500":
+        description: Server Error
+
+/v1/users/basicUser:
+  post:
+    summary: Create a new basic user
+    description: Allow create a new basic user
+    tags:
+      - Create Account
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/UserInput"
+          example:
+            username: "ayoze"
+            email: "ayoze@example.com"
+            password: "1234"
+    responses:
+      "201":
+        description: Basic user created successfully
+        schema:
+          $ref: "#/components/schemas/UserWithToken"
+      "500":
+        description: Server Error
+
+/v1/users/premiumUser:
+  post:
+    summary: Create a new premium user
+    description: Allow create a new premium user
+    tags:
+      - Create Account
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/UserInput"
+          example:
+            username: "valorate"
+            email: "valorate@example.com"
+            password: "1234"
+    responses:
+      "201":
+        description: Premium user created successfully
+        schema:
+          $ref: "#/components/schemas/UserWithToken"
+      "500":
+        description: Server Error
+
+/v1/users/{id}:
+  patch:
+    summary: Update a user
+    description: Updates the details of a user specified by the user ID.
+    tags:
+      - Users
+    security:
+      - JWT: []
+    parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        description: The unique identifier of the user.
+      - in: body
+        name: user
+        required: true
+        description: User data that needs to be updated.
+        schema:
+          type: object
+          properties:
+            username:
+              type: string
+              description: The new username of the user.
+            email:
+              type: string
+              format: email
+              description: The new email address of the user.
+          example:
+            username: "newUsername"
+            email: "new.email@example.com"
+    responses:
+      "200":
+        description: Successfully updated user
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                message:
+                  type: string
+                  example: "Successfully updated user"
+                user:
+                  $ref: "#/components/schemas/User"
+      "403":
+        description: You do not have permission to edit this user
+      "404":
+        description: User not found
+      "500":
+        description: Server Error
+
+  delete:
+    summary: Delete a user
+    description: Deletes the user specified by the user ID.
+    tags:
+      - Users
+    security:
+      - JWT: []
+    parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        description: The unique identifier of the user.
+    responses:
+      "200":
+        description: Successfully deleted user
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                message:
+                  type: string
+                  example: "Successfully deleted user"
+      "403":
+        description: You are not authorized to access this resource
+      "404":
+        description: User not found
+      "500":
+        description: Server Error

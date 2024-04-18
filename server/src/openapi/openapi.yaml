@@ -1,0 +1,15 @@
+openapi: 3.0.3
+info:
+  description: Application for fans of digital reading
+  version: 1.0.0
+  title: Swagger Bookbudy - API
+paths:
+  $ref: "paths.yaml"
+components:
+  schemas:
+    $ref: "schemas.yaml"
+  securitySchemes:
+    JWT:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

@@ -1,0 +1,50 @@
+UserInput:
+  type: object
+  properties:
+    username:
+      type: string
+    email:
+      type: string
+    password:
+      type: string
+    role:
+      type: string
+    required:
+      - username
+      - email
+      - password
+
+LoginInput:
+  type: object
+  properties:
+    username:
+      type: string
+    password:
+      type: string
+    required:
+      - username
+      - password
+
+UserWithToken:
+  type: object
+  properties:
+    user:
+      $ref: "#/components/schemas/LoginInput"
+      token:
+        type: string
+
+User:
+  type: object
+  properties:
+    _id:
+      type: string
+    username:
+      type: string
+    email:
+      type: string
+    role:
+      type: string
+    bookList:
+      type: array
+      items:
+        type: string
