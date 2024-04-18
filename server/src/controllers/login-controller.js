@@ -11,7 +11,7 @@ export async function login(req, res, next) {
     const user = await getUserByName(username);
 
     if (!user || !checkHash(password, user.password)) {
-      throw new HttpStatusError(401, "Invalid email or password");
+      throw new HttpStatusError(401, "Invalid username or password");
     }
 
     if (user) {
