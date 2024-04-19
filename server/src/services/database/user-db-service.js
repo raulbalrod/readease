@@ -15,6 +15,24 @@ export async function createUserWithRole(userData) {
   return user;
 }
 
+export async function changeRole(id, newRole) {
+  const allowedRoles = ["Basic", "Premium"];
+  if (!allowedRoles.includes(newRole)) {
+    throw new Error("You dont have permission to that");
+  }
+
+  const user = await User.findById(id);
+  if (!user) throw new Error("User not found");
+
+  if (user.role === newRole) {
+    throw new Error("The new role is the same as the current one");
+  }
+
+  user.role = newRole;
+  await user.save();
+  return user;
+}
+
 export async function getUserByName(username) {
   const user = await User.findOne({ username });
   return user;
