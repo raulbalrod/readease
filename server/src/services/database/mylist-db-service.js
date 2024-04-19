@@ -1,4 +1,5 @@
 import { Book, User } from "../../models/index.js";
+import { applyFilters } from "../../utils/filters.js";
 
 export async function addBookToList(userId, bookId) {
   try {
@@ -78,14 +79,18 @@ export async function getUserIdByUsername(username) {
   }
 }
 
-export async function getUserBookList(username) {
+export async function getUserBookList(username, filters) {
   try {
     const user = await User.findOne({ username });
     if (!user) {
       throw new Error("User not found");
     }
+    const filterResults = applyFilters(filters);
+    const { sortOption, ...filterQuery } = filterResults;
 
-    const bookList = await Book.find({ _id: { $in: user.bookList } });
+    const query = { _id: { $in: user.bookList }, ...filterQuery };
+
+    const bookList = await Book.find(query).sort(sortOption);
     return bookList;
   } catch (error) {
     console.error("Error retrieving the user's book list:", error);

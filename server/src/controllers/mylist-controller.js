@@ -56,7 +56,8 @@ export async function removeBookFromListController(req, res, next) {
 export async function getUserBookListController(req, res, next) {
   try {
     const { username } = req.params;
-    const bookList = await getUserBookList(username);
+    const filters = req.query;
+    const bookList = await getUserBookList(username, filters);
     return res.status(200).json(bookList);
   } catch (error) {
     next(error);
