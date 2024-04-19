@@ -1,3 +1,4 @@
+#Login
 /v1/users/login:
   post:
     summary: Sign in
@@ -31,6 +32,7 @@
             example:
               message: "Invalid username or password"
 
+# Users
 /v1/users:
   post:
     summary: Create a new user
@@ -271,6 +273,217 @@
       "500":
         description: Server Error
 
+# Books
+/v1/books:
+  post:
+    summary: Create a new book
+    description: Adds a new book to the collection. This operation is restricted to admin users.
+    tags:
+      - Books
+    security:
+      - JWT: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/BookInput"
+          examples:
+            example1:
+              summary: Example book input
+              value:
+                title: "El color púrpura"
+                subtitle: "Una Novela Emotiva sobre el Amor, la Superación y la Resiliencia en la América Profunda"
+                description: "Nominada por los estadounidenses como una de las 100 mejores novelas en la serie de PBS The Great American Read. Un clásico del feminismo y la lucha contra el racismo del siglo XX. Esta es la historia de dos hermanas: Nettie, que ejerce como misionera en África, y Celie, que vive en el Sur de Estados Unidos, casada con un hombre al que odia y abrumada por la vergüenza de haber sido violada por quien cree que es su padre."
+                categories: ["Biografía", "Mujeres Inspiradoras"]
+                rating: 4.5
+                image:
+                  frontImage: "https://m.media-amazon.com/images/I/81JQ6x9VxiL._SL1500_.jpg"
+                authors:
+                  name: "Alice Walker"
+                  img: "https://m.media-amazon.com/images/I/81KdvDr3FWL._SY600_.jpg"
+                  biography: "Alice Malsenior Walker, conocida como Alice Walker, es una escritora afroamericana y feminista que recibió el Premio Pulitzer a la obra de ficción en 1983, por la novela El color púrpura, en la que se basaron dos películas con el mismo nombre, una de 1985, dirigida por Steven Spielberg y otra de 2023, dirigida por Blitz Bazawule."
+                editorial: "Debolsillo"
+                pageCount: 224
+                ebook: "https://raw.githack.com/bookbudy/books/main/ebooks/Habitos-atomicos-James-Clear.epub"
+                audiobook: "https://raw.githack.com/bookbudy/books/main/audiobooks/Habitos-atomicos.mp3"
+    responses:
+      "201":
+        description: The book has been successfully created.
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Book"
+      "401":
+        description: Unauthorized access, only admin users can create books.
+      "500":
+        description: Server error
+
+  get:
+    summary: Retrieve all books
+    description: Fetches a list of all books, optionally filtered by category, status, and sorted based on various criteria.
+    tags:
+      - Books
+    security:
+      - JWT: []
+    parameters:
+      - in: query
+        name: categorie
+        schema:
+          type: string
+        description: Filter books by specific category.
+        required: false
+      - in: query
+        name: status
+        schema:
+          type: string
+          enum:
+            - Leyendo
+            - Futuras lecturas
+            - Leído
+        description: Filter books by their reading status.
+        required: false
+      - in: query
+        name: sort
+        schema:
+          type: string
+          enum:
+            - az
+            - za
+            - pageCountAsc
+            - pageCountDesc
+            - rateDesc
+            - rateAsc
+        description: Sort books by title (az or za), page count (ascending or descending), or rating (descending or ascending).
+        required: false
+    responses:
+      "200":
+        description: A list of books that match the given filters and sorting criteria.
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: "#/components/schemas/Book"
+      "500":
+        description: Server error
+
+/v1/books/{id}:
+  get:
+    summary: Retrieve a book by ID
+    description: Fetches detailed information about a book based on its ID. The amount of information returned depends on the user's role.
+    tags:
+      - Books
+    security:
+      - JWT: []
+    parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+          description: The unique identifier of the book.
+    responses:
+      "200":
+        description: Detailed information about the book.
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BookDetail"
+      "404":
+        description: Book not found.
+      "500":
+        description: Server error
+
+  patch:
+    summary: Update a book
+    description: Updates an existing book's details based on the book's ID. This operation is restricted to admin users.
+    tags:
+      - Books
+    security:
+      - JWT: []
+    parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+          description: The unique identifier of the book to be updated.
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/BookInput"
+          examples:
+            example1:
+              summary: Example book update
+              value:
+                title: "2333"
+                subtitle: "Explorando las Profundidades Desconocidas: Aventuras Subterráneas en Busca de Maravillas Ocultas"
+                description: "'Viaje al centro de la Tierra' narra la emocionante aventura del profesor Otto Lidenbrock y su sobrino Axel mientras exploran las entrañas de la Tierra en una expedición subterránea. La novela de Julio Verne es un clásico de la literatura de ciencia ficción y aventuras, explorando mundos desconocidos bajo la superficie terrestre."
+                categories:
+                  - "Ficción"
+                  - "Aventura"
+                rating: 4.3
+                status: "Futuras lecturas"
+                image:
+                  frontImage: "https://m.media-amazon.com/images/I/91zIwQ1iI1L._SL1500_.jpg"
+                authors:
+                  name: "Julio Verne"
+                  img: "https://m.media-amazon.com/images/I/51kDXbS1pnL._SY600_.jpg"
+                  biography: "Julio Verne fue un influyente escritor francés considerado uno de los padres fundadores de la ciencia ficción. A lo largo de su carrera, Verne escribió numerosas novelas que anticipaban avances tecnológicos y exploraban mundos fantásticos, siendo 'Viaje al centro de la Tierra' una de sus obras más conocidas."
+                editorial: "Austral"
+                pageCount: 320
+                ebook: "https://raw.githack.com/bookbudy/books/main/ebooks/viaje-al-centro-de-la-tierra-jules-verne.epub"
+                audiobook: "https://raw.githack.com/bookbudy/books/main/audiobooks/viaje-al-centro-de-la-tierra-jules-verne.mp3"
+    responses:
+      "200":
+        description: The book has been successfully updated.
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Book"
+      "401":
+        description: Unauthorized access, only admin users can update books.
+      "404":
+        description: Book not found.
+      "500":
+        description: Internal server error with details on what went wrong.
+
+  delete:
+    summary: Delete a book
+    description: Removes a book from the collection based on its ID. This operation is restricted to admin users.
+    tags:
+      - Books
+    security:
+      - JWT: []
+    parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+          description: The unique identifier of the book to be deleted.
+    responses:
+      "200":
+        description: The book has been successfully deleted.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                _id:
+                  type: string
+                  description: The ID of the book that was deleted.
+      "404":
+        description: Book not found.
+      "401":
+        description: Unauthorized access, only admin users can delete books.
+      "500":
+        description: Internal server error with details on what went wrong.
+
+# Mylist
 /v1/users/{id}/books:
   post:
     summary: Add a book to the user's book list
@@ -446,4 +659,4 @@
       "404":
         description: User or book not found.
       "500":
-        description: Internal server error with details on what went wrong.
+        description: Server error

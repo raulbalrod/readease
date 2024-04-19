@@ -129,3 +129,111 @@ Book:
       type: string
       format: date-time
       description: The date and time when the book was last updated.
+
+BookDetail:
+  type: object
+  properties:
+    _id:
+      type: string
+      format: uuid
+      description: "The unique identifier of the book."
+    title:
+      type: string
+      description: "The title of the book."
+    subtitle:
+      type: string
+      description: "The subtitle of the book."
+    description:
+      type: string
+      description: "A detailed description of the book."
+    categories:
+      type: array
+      items:
+        type: string
+      description: "Categories that the book belongs to."
+    rating:
+      type: number
+      description: "The book's rating, on a scale from 0 to 5."
+    status:
+      type: string
+      enum:
+        - "Leyendo"
+        - "Futuras lecturas"
+        - "Leído"
+      description: "Reading status of the book."
+    image:
+      type: object
+      properties:
+        frontImage:
+          type: string
+          description: "URL to the book's front cover image."
+    authors:
+      type: object
+      properties:
+        name:
+          type: string
+          description: "Name of the author."
+        img:
+          type: string
+          description: "URL to an image of the author."
+        biography:
+          type: string
+          description: "Biography of the author."
+    editorial:
+      type: string
+      description: "The publishing house of the book."
+    pageCount:
+      type: number
+      description: "The number of pages in the book."
+
+BookInput:
+  type: object
+  properties:
+    title:
+      type: string
+      description: "The title of the book, required."
+    subtitle:
+      type: string
+      description: "The subtitle of the book, required."
+    description:
+      type: string
+      description: "A detailed description of the book, required."
+    categories:
+      type: array
+      items:
+        type: string
+      description: "Categories that the book belongs to."
+    rating:
+      type: number
+      description: "The book's rating, on a scale from 0 to 5."
+    status:
+      type: string
+      enum:
+        - "Leyendo"
+        - "Futuras lecturas"
+        - "Leído"
+      description: "Reading status of the book."
+    image:
+      type: object
+      properties:
+        frontImage:
+          type: string
+          description: "URL to the book's front cover image."
+    authors:
+      type: object
+      properties:
+        name:
+          type: string
+          description: "Name of the author, required."
+        img:
+          type: string
+          description: "URL to an image of the author."
+        biography:
+          type: string
+          description: "Biography of the author."
+    editorial:
+      type: string
+      description: "The publishing house of the book."
+    pageCount:
+      type: number
+      description: "The number of pages in the book."
