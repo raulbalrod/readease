@@ -1,22 +1,20 @@
+import User from "../models/User.js";
 import {
   addBookToList,
   getUserBookList,
-  getUserIdByUsername,
   removeBookFromList,
   updateBookStatus,
 } from "../services/database/mylist-db-service.js";
 
 export async function myBookList(req, res, next) {
   try {
-    const { username } = req.params;
+    const { id } = req.params;
     const { bookId } = req.body;
 
-    const userId = await getUserIdByUsername(username);
-    if (!userId) {
-      return res.status(404).send({ message: "User not found" });
-    }
+    const user = await User.findById(id);
+    if (!user) return res.status(404).send({ message: "User not found" });
 
-    const result = await addBookToList(userId, bookId);
+    const result = await addBookToList(id, bookId);
     return res.status(result.status).send({ message: result.message });
   } catch (error) {
     next(error);
@@ -24,11 +22,11 @@ export async function myBookList(req, res, next) {
 }
 
 export async function updateBookStatusController(req, res) {
-  const { userId, bookId } = req.params;
-  const { newStatus } = req.body;
+  const { id } = req.params;
+  const { newStatus, bookId } = req.body;
 
   try {
-    const user = await updateBookStatus(userId, bookId, newStatus);
+    const user = await updateBookStatus(id, bookId, newStatus);
     if (!user) {
       return res.status(404).send({ message: "User or book not found" });
     }
@@ -42,15 +40,13 @@ export async function updateBookStatusController(req, res) {
 
 export async function removeBookFromListController(req, res, next) {
   try {
-    const { username } = req.params;
+    const { id } = req.params;
     const { bookId } = req.body;
 
-    const userId = await getUserIdByUsername(username);
-    if (!userId) {
-      return res.status(404).send({ message: "User not found" });
-    }
+    const user = await User.findById(id);
+    if (!user) return res.status(404).send({ message: "User not found" });
 
-    const result = await removeBookFromList(userId, bookId);
+    const result = await removeBookFromList(id, bookId);
     return res.status(result.status).send({ message: result.message });
   } catch (error) {
     next(error);
