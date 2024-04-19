@@ -32,13 +32,17 @@ router.get("/", isAdmin, getUsersController); // admin
 router.patch("/:id", checkTokenOwnUser, editUserController); // own user
 router.delete("/:id", isAdmin, deleteUserController); // admin
 
-router.post("/:username/books", checkToken, myBookList); // basic && premium [checkToken??]
-router.patch("/:userId/book/:bookId", updateBookStatusController); // own user
+router.post("/:username/books", checkTokenOwnUser, myBookList); // own user
+router.patch(
+  "/:userId/book/:bookId",
+  checkTokenOwnUser,
+  updateBookStatusController
+); // own user
 router.get("/:username/books", checkToken, getUserBookListController); // basic && premium [checkToken??]
 router.post(
   "/:username/books/remove",
-  checkToken,
+  checkTokenOwnUser,
   removeBookFromListController
-); // basic && premium [checkToken??]
+); // own user
 
 export default router;
