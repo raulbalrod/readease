@@ -6,7 +6,7 @@ export async function createBook(data) {
 }
 
 export async function getBookById(id) {
-  return Book.findOne(id);
+  return Book.findOne({ _id: id });
 }
 
 export async function getBooks(filters) {
