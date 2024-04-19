@@ -48,3 +48,84 @@ User:
       type: array
       items:
         type: string
+
+Book:
+  type: object
+  properties:
+    _id:
+      type: string
+      format: uuid
+      description: The unique identifier of the book.
+    title:
+      type: string
+      description: The title of the book.
+      required: true
+    subtitle:
+      type: string
+      description: The subtitle of the book.
+      required: true
+    description:
+      type: string
+      description: A detailed description of the book.
+      required: true
+    categories:
+      type: array
+      items:
+        type: string
+      description: Categories that the book belongs to.
+    rating:
+      type: number
+      description: The book's rating, on a scale from 0 to 5.
+      minimum: 0
+      maximum: 5
+      default: 0
+    status:
+      type: string
+      description: Reading status of the book.
+      enum:
+        - Leyendo
+        - Futuras lecturas
+        - Leído
+      default: "Futuras lecturas"
+    image:
+      type: object
+      properties:
+        frontImage:
+          type: string
+          description: URL to the book's front cover image.
+          required: true
+    authors:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the author.
+          required: true
+        img:
+          type: string
+          description: URL to an image of the author.
+        biography:
+          type: string
+          description: Biography of the author.
+    editorial:
+      type: string
+      description: The publishing house of the book.
+    pageCount:
+      type: number
+      description: The number of pages in the book.
+      required: true
+      minimum: 0
+    ebook:
+      type: string
+      description: URL to the ebook version if available.
+    audiobook:
+      type: string
+      description: URL to the audiobook version if available.
+    createdAt:
+      type: string
+      format: date-time
+      description: The date and time when the book was created.
+    updatedAt:
+      type: string
+      format: date-time
+      description: The date and time when the book was last updated.
