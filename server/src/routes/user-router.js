@@ -27,7 +27,7 @@ router.post("/login", login); // all
 router.post("/", isAdmin, createUserController); // admin
 router.post("/basicUser", createBasicUser); // all
 router.post("/premiumUser", createPremiumUser); // all
-router.patch("/:id/role", checkToken, changeRoleOfUser); // basic && premium [checkToken??]
+router.patch("/:id/role", checkTokenOwnUser, changeRoleOfUser); // own user
 router.get("/", isAdmin, getUsersController); // admin
 router.patch("/:id", checkTokenOwnUser, editUserController); // own user
 router.delete("/:id", isAdmin, deleteUserController); // admin
