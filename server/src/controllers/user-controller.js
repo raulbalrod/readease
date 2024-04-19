@@ -1,5 +1,6 @@
 import jwt from "jsonwebtoken";
 import {
+  changeRole,
   createUser,
   createUserWithRole,
   deleteUser,
@@ -56,6 +57,21 @@ export async function getUsersController(req, res, next) {
   try {
     const users = await getUsers(req.query);
     return res.send(users);
+  } catch (error) {
+    next(error);
+  }
+}
+
+export async function changeRoleOfUser(req, res, next) {
+  try {
+    const { id } = req.params;
+    const { newRole } = req.body;
+
+    if (!newRole)
+      return res.status(400).send({ message: "New role is required" });
+
+    const updatedUser = await changeRole(id, newRole);
+    res.send({ message: "Role updated successfully", user: updatedUser });
   } catch (error) {
     next(error);
   }
