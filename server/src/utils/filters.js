@@ -1,13 +1,12 @@
 export function applyFilters(filters) {
-  const { categorie, status, sort } = filters;
+  const { categorie, status, sort, titleSearch } = filters;
   let query = {};
 
-  if (categorie) {
-    query.categories = categorie;
-  }
-  if (status) {
-    query.status = status;
-  }
+  if (categorie) query.categories = categorie;
+
+  if (status) query.status = status;
+
+  if (titleSearch) query.title = { $regex: titleSearch, $options: "i" };
 
   let sortOption = {};
   if (sort === "az") {
