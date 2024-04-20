@@ -83,7 +83,8 @@
 									"",
 									""
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -102,7 +103,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"title\": \"23\",\r\n    \"subtitle\": \"Explorando las Profundidades Desconocidas: Aventuras Subterráneas en Busca de Maravillas Ocultas\",\r\n    \"description\": \"'Viaje al centro de la Tierra' narra la emocionante aventura del profesor Otto Lidenbrock y su sobrino Axel mientras exploran las entrañas de la Tierra en una expedición subterránea. La novela de Julio Verne es un clásico de la literatura de ciencia ficción y aventuras, explorando mundos desconocidos bajo la superficie terrestre.\",\r\n    \"categories\": [\"Ficción\", \"Aventura\"],\r\n    \"rating\": 4.3,\r\n    \"image\": {\r\n      \"frontImage\": \"https://m.media-amazon.com/images/I/91zIwQ1iI1L._SL1500_.jpg\"\r\n    },\r\n    \"authors\": {\r\n      \"name\": \"Julio Verne\",\r\n      \"img\": \"https://m.media-amazon.com/images/I/51kDXbS1pnL._SY600_.jpg\",\r\n      \"biography\": \"Julio Verne fue un influyente escritor francés considerado uno de los padres fundadores de la ciencia ficción. A lo largo de su carrera, Verne escribió numerosas novelas que anticipaban avances tecnológicos y exploraban mundos fantásticos, siendo 'Viaje al centro de la Tierra' una de sus obras más conocidas.\"\r\n    },\r\n    \"editorial\": \"Austral\",\r\n    \"pageCount\": 320,\r\n    \"ebook\": \"https://raw.githack.com/bookbudy/books/main/ebooks/viaje-al-centro-de-la-tierra-jules-verne.epub\",\r\n    \"audiobook\": \"https://raw.githack.com/bookbudy/books/main/audiobooks/viaje-al-centro-de-la-tierra-jules-verne.mp3\"\r\n}",
+							"raw": "{\r\n    \"title\": \"El color púrpura\",\r\n    \"subtitle\": \"Una Novela Emotiva sobre el Amor, la Superación y la Resiliencia en la América Profunda\",\r\n    \"description\": \"Nominada por los estadounidenses como una de las 100 mejores novelas en la serie de PBS The Great American Read. Un clásico del feminismo y la lucha contra el racismo del siglo XX. Esta es la historia de dos hermanas: Nettie, que ejerce como misionera en África, y Celie, que vive en el Sur de Estados Unidos, casada con un hombre al que odia y abrumada por la vergüenza de haber sido violada por quien cree que es su padre.\",\r\n    \"categories\": [\"Biografía\", \"Mujeres Inspiradoras\"],\r\n    \"rating\": 4.5,\r\n    \"image\": {\r\n      \"frontImage\": \"https://m.media-amazon.com/images/I/81JQ6x9VxiL._SL1500_.jpg\"\r\n    },\r\n    \"authors\": {\r\n      \"name\": \"Alice Walker\",\r\n      \"img\": \"https://m.media-amazon.com/images/I/81KdvDr3FWL._SY600_.jpg\",\r\n      \"biography\": \"Alice Malsenior Walker, conocida como Alice Walker, es una escritora afroamericana y feminista que recibió el Premio Pulitzer a la obra de ficción en 1983, por la novela El color púrpura, en la que  se basaron dos películas con el mismo nombre, una de 1985, dirigida por Steven Spielberg y otra de 2023, dirigida por Blitz Bazawule.\"\r\n    },\r\n    \"editorial\": \"Debolsillo\",\r\n    \"pageCount\": 224,\r\n    \"ebook\": \"https://raw.githack.com/bookbudy/books/main/ebooks/Habitos-atomicos-James-Clear.epub\",\r\n    \"audiobook\": \"https://raw.githack.com/bookbudy/books/main/audiobooks/Habitos-atomicos.mp3\"\r\n  }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -155,7 +156,8 @@
 									"    });\r",
 									"});"
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -173,19 +175,25 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/books",
+							"raw": "{{baseUrl}}/books?titleSearch=Hábitos",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"books"
+							],
+							"query": [
+								{
+									"key": "titleSearch",
+									"value": "Hábitos"
+								}
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Get book by title",
+					"name": "Get book by id",
 					"event": [
 						{
 							"listen": "test",
@@ -230,7 +238,8 @@
 									"\r",
 									""
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -248,13 +257,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/books/23",
+							"raw": "{{baseUrl}}/books/65e8b48286c68e5f2c3c4d65",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"books",
-								"23"
+								"65e8b48286c68e5f2c3c4d65"
 							]
 						}
 					},
@@ -315,7 +324,8 @@
 									"\r",
 									""
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -334,7 +344,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"title\": \"2333\",\r\n    \"subtitle\": \"Explorando las Profundidades Desconocidas: Aventuras Subterráneas en Busca de Maravillas Ocultas\",\r\n    \"description\": \"'Viaje al centro de la Tierra' narra la emocionante aventura del profesor Otto Lidenbrock y su sobrino Axel mientras exploran las entrañas de la Tierra en una expedición subterránea. La novela de Julio Verne es un clásico de la literatura de ciencia ficción y aventuras, explorando mundos desconocidos bajo la superficie terrestre.\",\r\n    \"categories\": [\r\n        \"Ficción\",\r\n        \"Aventura\"\r\n    ],\r\n    \"rating\": 4.3,\r\n    \"status\": \"Futuras lecturas\",\r\n    \"image\": {\r\n        \"frontImage\": \"https://m.media-amazon.com/images/I/91zIwQ1iI1L._SL1500_.jpg\"\r\n    },\r\n    \"authors\": {\r\n        \"name\": \"Julio Verne\",\r\n        \"img\": \"https://m.media-amazon.com/images/I/51kDXbS1pnL._SY600_.jpg\",\r\n        \"biography\": \"Julio Verne fue un influyente escritor francés considerado uno de los padres fundadores de la ciencia ficción. A lo largo de su carrera, Verne escribió numerosas novelas que anticipaban avances tecnológicos y exploraban mundos fantásticos, siendo 'Viaje al centro de la Tierra' una de sus obras más conocidas.\"\r\n    },\r\n    \"editorial\": \"Austral\",\r\n    \"pageCount\": 320,\r\n    \"ebook\": \"https://raw.githack.com/bookbudy/books/main/ebooks/viaje-al-centro-de-la-tierra-jules-verne.epub\",\r\n    \"audiobook\": \"https://raw.githack.com/bookbudy/books/main/audiobooks/viaje-al-centro-de-la-tierra-jules-verne.mp3\",\r\n    \"_id\": \"65eecc8d08947cde3031bba7\"\r\n}",
+							"raw": "{\r\n    \"title\": \"2333\",\r\n    \"subtitle\": \"Explorando las Profundidades Desconocidas: Aventuras Subterráneas en Busca de Maravillas Ocultas\",\r\n    \"description\": \"'Viaje al centro de la Tierra' narra la emocionante aventura del profesor Otto Lidenbrock y su sobrino Axel mientras exploran las entrañas de la Tierra en una expedición subterránea. La novela de Julio Verne es un clásico de la literatura de ciencia ficción y aventuras, explorando mundos desconocidos bajo la superficie terrestre.\",\r\n    \"categories\": [\r\n        \"Ficción\",\r\n        \"Aventura\"\r\n    ],\r\n    \"rating\": 4.3,\r\n    \"status\": \"Futuras lecturas\",\r\n    \"image\": {\r\n        \"frontImage\": \"https://m.media-amazon.com/images/I/91zIwQ1iI1L._SL1500_.jpg\"\r\n    },\r\n    \"authors\": {\r\n        \"name\": \"Julio Verne\",\r\n        \"img\": \"https://m.media-amazon.com/images/I/51kDXbS1pnL._SY600_.jpg\",\r\n        \"biography\": \"Julio Verne fue un influyente escritor francés considerado uno de los padres fundadores de la ciencia ficción. A lo largo de su carrera, Verne escribió numerosas novelas que anticipaban avances tecnológicos y exploraban mundos fantásticos, siendo 'Viaje al centro de la Tierra' una de sus obras más conocidas.\"\r\n    },\r\n    \"editorial\": \"Austral\",\r\n    \"pageCount\": 320,\r\n    \"ebook\": \"https://raw.githack.com/bookbudy/books/main/ebooks/viaje-al-centro-de-la-tierra-jules-verne.epub\",\r\n    \"audiobook\": \"https://raw.githack.com/bookbudy/books/main/audiobooks/viaje-al-centro-de-la-tierra-jules-verne.mp3\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -342,13 +352,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/books/65eed7ae09a8f403ead0d9a8",
+							"raw": "{{baseUrl}}/books/6603f795a9148b2b8a267908",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"books",
-								"65eed7ae09a8f403ead0d9a8"
+								"6603f795a9148b2b8a267908"
 							]
 						}
 					},
@@ -427,7 +437,8 @@
 									"\r",
 									""
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -445,13 +456,13 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/books/65eed7ae09a8f403ead0d9a8",
+							"raw": "{{baseUrl}}/books/6603f795a9148b2b8a267908",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"books",
-								"65eed7ae09a8f403ead0d9a8"
+								"6603f795a9148b2b8a267908"
 							]
 						}
 					},
@@ -656,7 +667,8 @@
 									"\r",
 									""
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -665,7 +677,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"username\": \"valorate\",\r\n  \"email\": \"valorate@example.com\",\r\n  \"password\": \"1234\"\r\n}\r\n",
+							"raw": "{\r\n  \"username\": \"padelicioso\",\r\n  \"email\": \"padelicioso@example.com\",\r\n  \"password\": \"1234\"\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -680,6 +692,44 @@
 							"path": [
 								"users",
 								"premiumUser"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Change role",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"newRole\": \"Premium\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users/6622427ee843b31d2ad1a017/role",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"6622427ee843b31d2ad1a017",
+								"role"
 							]
 						}
 					},
@@ -796,7 +846,8 @@
 									"\r",
 									""
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -844,7 +895,8 @@
 								"exec": [
 									""
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -862,13 +914,13 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/users/65eed44109a8f403ead0d988",
+							"raw": "{{baseUrl}}/users/66215602b6b89fc03e7cbd57",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"users",
-								"65eed44109a8f403ead0d988"
+								"66215602b6b89fc03e7cbd57"
 							]
 						}
 					},
@@ -904,14 +956,52 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/users/raulbalrod/books",
+							"raw": "{{baseUrl}}/users/65e8b0f2bc2f8a8f50f75414/books",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"users",
-								"raulbalrod",
+								"65e8b0f2bc2f8a8f50f75414",
 								"books"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update status for book",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"bookId\": \"65e8b48286c68e5f2c3c4d65\",\n    \"newStatus\": \"Leyendo\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users/65e8b0f2bc2f8a8f50f75414/book",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"65e8b0f2bc2f8a8f50f75414",
+								"book"
 							]
 						}
 					},
@@ -963,7 +1053,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"bookId\": \"65e8b49f86c68e5f2c3c4d67\"\r\n}",
+							"raw": "{\r\n    \"bookId\": \"65e8b48286c68e5f2c3c4d65\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -971,13 +1061,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/users/raulbalrod/books/remove",
+							"raw": "{{baseUrl}}/users/65e8b0f2bc2f8a8f50f75414/books/remove",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"users",
-								"raulbalrod",
+								"65e8b0f2bc2f8a8f50f75414",
 								"books",
 								"remove"
 							]
@@ -1032,7 +1122,8 @@
 							"    pm.globals.set(\"token\", responseData.token); // Store the token in the global variable\r",
 							"});"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"packages": {}
 					}
 				}
 			],
@@ -1060,6 +1151,33 @@
 				}
 			},
 			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "localhost:3000/v1",
+			"type": "string"
 		}
 	]
 }
