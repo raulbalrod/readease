@@ -344,6 +344,12 @@
         description: Filter books by their reading status.
         required: false
       - in: query
+        name: titleSearch
+        schema:
+          type: string
+        description: Search books by title keywords.
+        required: false
+      - in: query
         name: sort
         schema:
           type: string
@@ -546,7 +552,42 @@
         required: true
         schema:
           type: string
-        description: The username of the user whose book list is to be retrieved.
+          description: The username of the user whose book list is to be retrieved.
+      - in: query
+        name: categorie
+        schema:
+          type: string
+        description: Filter books by specific category.
+        required: false
+      - in: query
+        name: status
+        schema:
+          type: string
+          enum:
+            - Leyendo
+            - Futuras lecturas
+            - Leído
+        description: Filter books by their reading status.
+        required: false
+      - in: query
+        name: titleSearch
+        schema:
+          type: string
+        description: Search books by title keywords.
+        required: false
+      - in: query
+        name: sort
+        schema:
+          type: string
+          enum:
+            - az
+            - za
+            - pageCountAsc
+            - pageCountDesc
+            - rateDesc
+            - rateAsc
+        description: Sort books by title (alphabetically), page count, or rating.
+        required: false
     responses:
       "200":
         description: A list of books associated with the user.
