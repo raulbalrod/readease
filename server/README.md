@@ -29,7 +29,7 @@ npm start
 
 4. By default, the app deploy on port 3000. To use the app you can:
     - **Postman** Use the provided [postman collection](./postman/collections) and [postman environment](./postman/environments).
-    - **SwaggerUI** Go to [localhost:3000/api-docs](localhost:3000/api-docs) to see swagger playground.
+    - **SwaggerUI** Go to [localhost:3000/api-docs](http://localhost:3000/api-docs/) to see swagger playground or [Swagger deployed](https://bookbuddy-v7ra.onrender.com/api-docs/).
     - **Deploy** Use the already deployed [API](https://bookbuddy-v7ra.onrender.com) and use the different API endpoints.
 
 ## Architecture
