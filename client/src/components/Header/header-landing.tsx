@@ -19,17 +19,18 @@ export default function HeaderLandingPage() {
   }
 
   return (
-    <header className="fixed flex items-center justify-between bg-primary w-screen py-6 px-10">
-      <nav className="flex items-center gap-10">
+    <header className="fixed flex items-center justify-between bg-primary w-screen py-6 px-10 z-50">
+      <nav className="hidden md:flex items-center gap-10">
         <Image
           src="/bookbudy/icon.png"
           alt="logo bookbuddy"
           width="50"
           height="50"
+          className="md:block"
         />
         <ul className="flex gap-6">
           <li
-            className={`text-lg uppercase font-medium ${getItemClass(
+            className={`md:hidden xl:block xl:text-lg uppercase font-medium ${getItemClass(
               "must-sees",
             )}`}
             onClick={() => handleItemClick("must-sees")}
@@ -37,7 +38,7 @@ export default function HeaderLandingPage() {
             <a href="#must-sees">must-sees</a>
           </li>
           <li
-            className={`text-lg uppercase font-medium ${getItemClass(
+            className={`md:hidden xl:block xl:text-lg uppercase font-medium ${getItemClass(
               "ebooks",
             )}`}
             onClick={() => handleItemClick("ebooks")}
@@ -45,7 +46,7 @@ export default function HeaderLandingPage() {
             <a href="#ebooks">ebooks</a>
           </li>
           <li
-            className={`text-lg uppercase font-medium ${getItemClass(
+            className={`md:hidden xl:block xl:text-lg uppercase font-medium ${getItemClass(
               "audiobooks",
             )}`}
             onClick={() => handleItemClick("audiobooks")}
@@ -53,13 +54,15 @@ export default function HeaderLandingPage() {
             <a href="#audiobooks">audiobooks</a>
           </li>
           <li
-            className={`text-lg uppercase font-medium ${getItemClass("faq")}`}
+            className={`md:hidden xl:block xl:text-lg uppercase font-medium ${getItemClass(
+              "faq",
+            )}`}
             onClick={() => handleItemClick("faq")}
           >
             <a href="#faq">faq</a>
           </li>
           <li
-            className={`text-lg uppercase font-medium ${getItemClass(
+            className={`md:hidden xl:block xl:text-lg uppercase font-medium ${getItemClass(
               "prices",
             )}`}
             onClick={() => handleItemClick("prices")}
@@ -69,9 +72,17 @@ export default function HeaderLandingPage() {
         </ul>
       </nav>
 
-      <SelectLanguage />
+      <Image
+        src="/bookbudy/icon.png"
+        alt="logo bookbuddy"
+        width="50"
+        height="50"
+        className="block 
+        md:hidden"
+      />
 
       <section className="flex gap-6">
+        <SelectLanguage />
         <Button text="Sign in" path="sign-in" variant="outlined" />
         <Button text="Subscribe now" path="/subscription" variant="default" />
       </section>
