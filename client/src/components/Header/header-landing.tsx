@@ -3,6 +3,7 @@
 import React, { useState } from "react"
 import Image from "next/image"
 import Button from "../Button"
+import SelectLanguage from "../Select/Language"
 
 export default function HeaderLandingPage() {
   const [activeItem, setActiveItem] = useState<string | null>(null)
@@ -67,6 +68,8 @@ export default function HeaderLandingPage() {
           </li>
         </ul>
       </nav>
+
+      <SelectLanguage />
 
       <section className="flex gap-6">
         <Button text="Sign in" path="sign-in" variant="outlined" />
