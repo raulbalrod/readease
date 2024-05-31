@@ -9,7 +9,7 @@ export default function Footer() {
           <li key={rs.name}>
             <a href={rs.link}>
               <i
-                className={`bx ${rs.logo} bx-md text-accent hover:text-accent/85`}
+                className={`bx ${rs.logo} bx-md text-neutral hover:text-neutral/85`}
               ></i>
             </a>
           </li>
@@ -19,7 +19,7 @@ export default function Footer() {
         {LEGAL_LINK.map((rs) => (
           <li
             key={rs.name}
-            className="text-accent hover:underline cursor-pointer"
+            className="text-neutral hover:underline cursor-pointer"
           >
             <a href={rs.link} target="_blank">
               {rs.title}
@@ -27,7 +27,7 @@ export default function Footer() {
           </li>
         ))}
       </ul>
-      <span className="text-accent">
+      <span className="text-neutral">
         ©2023 BookBudy SA. All Rights Reserved Bookbuddy™ is used under license.
       </span>
     </footer>
