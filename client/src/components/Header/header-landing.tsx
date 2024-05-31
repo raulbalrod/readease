@@ -14,20 +14,21 @@ export default function HeaderLandingPage() {
 
   const getItemClass = (item: string) => {
     return item === activeItem
-      ? "text-secondary underline"
-      : "text-neutral hover:text-secondary hover:underline cursor-pointer hover:delay-75"
+      ? "text-secondary"
+      : "text-neutral hover:text-secondary cursor-pointer hover:delay-75"
   }
 
   return (
     <header className="fixed flex items-center justify-between bg-primary w-screen py-6 px-10 z-50">
       <nav className="hidden md:flex items-center gap-10">
-        <Image
-          src="/bookbudy/icon.png"
-          alt="logo bookbuddy"
-          width="50"
-          height="50"
-          className="md:block"
-        />
+        <div>
+          <Image
+            src="/bookbuddy/whithout-title/logo.svg"
+            alt="logo bookbuddy"
+            width="64"
+            height="64"
+          />
+        </div>
         <ul className="flex gap-6">
           <li
             className={`md:hidden xl:block xl:text-lg uppercase font-medium ${getItemClass(
@@ -73,7 +74,7 @@ export default function HeaderLandingPage() {
       </nav>
 
       <Image
-        src="/bookbudy/icon.png"
+        src="/bookbuddy/whithout-title/logo.svg"
         alt="logo bookbuddy"
         width="50"
         height="50"
@@ -82,8 +83,8 @@ export default function HeaderLandingPage() {
       />
 
       <section className="flex gap-6">
-        <SelectLanguage />
-        <Button text="Sign in" path="sign-in" variant="outlined" />
+        {/* <SelectLanguage /> */}
+        <Button text="Log in" path="sign-in" variant="only_text" />
         <Button text="Subscribe now" path="/subscription" variant="default" />
       </section>
     </header>
