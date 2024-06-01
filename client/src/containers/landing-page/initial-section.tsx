@@ -3,9 +3,7 @@ import Image from "next/image"
 
 export default function InitialSectionContainer() {
   return (
-    <div className="relative top-20 flex flex-col items-center justify-center gap-4 w-full py-16 bg-[url('/backgrounds/initial-content-bg.jpg')] bg-cover bg-center text-neutral">
-      <div className="absolute inset-0 bg-gradient-to-l from-primary/85 to-primary/40"></div>
-
+    <>
       <Image
         src="/bookbuddy/whithout-title/logo-v2.svg"
         alt="Logo Bookbuddy"
@@ -28,6 +26,6 @@ export default function InitialSectionContainer() {
 
       <span className="relative text-sm text-neutral">Cancel at any time</span>
       <Button text="Subscribe now" path="/subscription" variant="default" />
-    </div>
+    </>
   )
 }

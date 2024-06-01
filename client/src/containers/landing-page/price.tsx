@@ -8,10 +8,7 @@ export default function PriceSection() {
   const [isAnnual, setIsAnnual] = useState(false)
 
   return (
-    <div
-      id="prices"
-      className="w-full flex flex-col items-center justify-center gap-2 py-16 bg-black/20 bg-custom-linear"
-    >
+    <>
       <h1 className="text-secondary font-semibold">Pricing</h1>
       <h3 className="text-center text-4xl font-semibold">
         Select the perfect plan
@@ -46,6 +43,6 @@ export default function PriceSection() {
           <PlanCard key={index} plan={plan} isAnnual={isAnnual} />
         ))}
       </section>
-    </div>
+    </>
   )
 }
