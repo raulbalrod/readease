@@ -17,7 +17,16 @@ export async function createBasicUser(req, res, next) {
 
     const user = await createUserWithRole({ username, email, password, role });
 
-    res.status(201).send({ user });
+    const userInfo = {
+      userId: user._id,
+      username: user.username,
+      role: user.role,
+    };
+
+    const jwtConfig = { expiresIn: 60 * 60 };
+    const token = jwt.sign(userInfo, config.app.secretKey, jwtConfig);
+
+    res.status(201).send({ user, token });
   } catch (error) {
     next(error);
   }
@@ -30,7 +39,16 @@ export async function createPremiumUser(req, res, next) {
 
     const user = await createUserWithRole({ username, email, password, role });
 
-    res.status(201).send({ user });
+    const userInfo = {
+      userId: user._id,
+      username: user.username,
+      role: user.role,
+    };
+
+    const jwtConfig = { expiresIn: 60 * 60 };
+    const token = jwt.sign(userInfo, config.app.secretKey, jwtConfig);
+
+    res.status(201).send({ user, token });
   } catch (error) {
     next(error);
   }
