@@ -3,7 +3,7 @@ export const PRICING = [
     title: "Free",
     description:
       "The essence of tracking your readings and discovering new titles.",
-    redirect: "/create-free-account",
+    redirect: "/subscription/create-free-account",
     price_monthly: "0",
     price_yearly: "0",
     advantages: ["Reading management", "Research among +100 titles"],
@@ -12,7 +12,7 @@ export const PRICING = [
   {
     title: "Premium",
     description: "The plan with which you will enjoy digital reading.",
-    redirect: "/create-premium-account",
+    redirect: "/subscription/create-premium-account",
     price_monthly: "14,95",
     price_yearly: "159,95",
     advantages: [
@@ -26,7 +26,7 @@ export const PRICING = [
   {
     title: "Elite",
     description: "The plan with which you will enjoy digital reading.",
-    redirect: "/create-elite-account",
+    redirect: "/subscription/create-elite-account",
     price_monthly: "19,95",
     price_yearly: "214,95",
     advantages: [

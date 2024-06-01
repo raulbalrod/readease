@@ -18,6 +18,10 @@ const config: Config = {
           "linear-gradient(40deg, #24264499 10%, #332b55 35%, #332b55 75%, #030328 120%)",
         "mustsees-linear":
           "linear-gradient(40deg, #030328 10%, #19162b 35%, #332b55 95%, #6656aa 120%)",
+        "subscription-linear":
+          "linear-gradient(40deg, #19162b 5%, #332b55 15%, #4c4180 65%, #332b55 80%, #19162b 110%)",
+        "paymentype-linear":
+          "linear-gradient(40deg, #604e06 5%, #302703 15%, #030328 45%, #332b55 120%)",
       },
       colors: {
         primary: "#030328",
