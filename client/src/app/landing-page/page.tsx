@@ -33,10 +33,7 @@ export default function LandingPage() {
         <EbooksList />
       </div>
 
-      <div
-        id="audiobooks"
-        className="p-20 w-full bg-mustsees-linear text-neutral"
-      >
+      <div id="audiobooks" className="p-20 w-full bg-bg-linear text-neutral">
         <Audiobooks />
       </div>
 
