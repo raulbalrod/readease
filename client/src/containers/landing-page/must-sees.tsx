@@ -38,13 +38,13 @@ export default function ItemsList() {
       <h1 className="text-left text-4xl font-semibold mb-4 w-72">
         Everything you can't miss
       </h1>
-      <h3 className="text-left text-lg mb-8 w-[550px]">
+      <h3 className="text-left text-lg mb-8 w-full">
         Enjoy a unique collection of avant-garde literary works, critically
         praised books in ebook and audiobook format.
       </h3>
-      <div className="flex flex-col gap-6 items-start justify-center mx-auto max-w-screen-lg pl-4">
+      <div className="flex flex-row lg:flex-col gap-6 items-start justify-center mx-auto max-w-screen-lg pl-4">
         <div
-          className="flex items-center gap-10"
+          className="flex lg:flex-row flex-col lg:items-center gap-10"
           style={{ paddingLeft: "40px" }}
         >
           {firstFiveItems.map((item: any, index: number) => (
@@ -61,7 +61,7 @@ export default function ItemsList() {
         </div>
 
         <div
-          className="flex items-start gap-10 mt-16"
+          className="flex lg:flex-row flex-col lg:items-start justify-center gap-10 mt-16"
           style={{ paddingLeft: "40px" }}
         >
           {nextFiveItems.map((item: any, index: number) => (

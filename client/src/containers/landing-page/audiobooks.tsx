@@ -31,25 +31,22 @@ export default function Audiobooks() {
   }, [])
 
   const firstFiveItems = audiobooks.slice(0, 5)
-  const nextFiveItems = audiobooks.slice(22, 27)
+  const nextFiveItems = audiobooks.slice(23, 28)
 
   return (
     <>
-      <h1
-        className="text-left text-4xl font-semibold mb-4"
-        style={{ width: "480px" }}
-      >
+      <h1 className="text-left text-4xl font-semibold mb-4 md:w-[480px] w-3/4">
         The <span className="text-secondary">audiobooks</span> everyone is
         talking about
       </h1>
-      <h3 className="text-left text-lg mb-8 w-[600px]">
+      <h3 className="text-left text-lg mb-8 md:w-[600px]">
         Discover your next fascination in our growing selection of audiobooks
         packed with captivating stories, immersive reality shows, and iconic
         classics, narrated for your listening pleasure.
       </h3>
-      <div className="flex flex-col gap-6 items-start justify-center mx-auto max-w-screen-lg pl-4">
+      <div className="flex flex-row lg:flex-col gap-6 items-start justify-center mx-auto max-w-screen-lg pl-4">
         <div
-          className="flex items-center gap-10"
+          className="flex lg:flex-row flex-col lg:items-center justify-center gap-10"
           style={{ paddingLeft: "40px" }}
         >
           {firstFiveItems.map((item: any, index: number) => (
@@ -66,7 +63,7 @@ export default function Audiobooks() {
         </div>
 
         <div
-          className="flex items-start gap-10 mt-16"
+          className="flex lg:flex-row flex-col lg:items-start justify-center gap-10 mt-16"
           style={{ paddingLeft: "40px" }}
         >
           {nextFiveItems.map((item: any, index: number) => (

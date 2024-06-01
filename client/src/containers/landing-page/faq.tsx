@@ -10,7 +10,7 @@ export default function FaqSection() {
   return (
     <>
       <h1 className="text-secondary font-semibold">FAQ</h1>
-      <h3 className="text-center text-4xl font-semibold">
+      <h3 className="text-center text-4xl lg:w-full w-3/4  font-semibold">
         What everyone is wondering about Bookbuddy
       </h3>
       <Accordion type="single" collapsible>

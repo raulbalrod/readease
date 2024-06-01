@@ -15,11 +15,11 @@ export default function Footer() {
           </li>
         ))}
       </ul>
-      <ul className="flex gap-5">
+      <ul className="flex md:flex-row flex-col gap-5">
         {LEGAL_LINK.map((rs) => (
           <li
             key={rs.name}
-            className="text-neutral hover:underline cursor-pointer"
+            className="text-neutral hover:underline cursor-pointer text-center"
           >
             <a href={rs.link} target="_blank">
               {rs.title}
@@ -27,7 +27,7 @@ export default function Footer() {
           </li>
         ))}
       </ul>
-      <span className="text-neutral">
+      <span className="text-neutral text-center md:w-full w-3/4">
         ©2023 BookBudy SA. All Rights Reserved Bookbuddy™ is used under license.
       </span>
     </footer>
