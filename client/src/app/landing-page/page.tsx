@@ -7,6 +7,7 @@ import InitialSectionContainer from "@/containers/landing-page/initial-section"
 import ItemsList from "@/containers/landing-page/must-sees"
 import PriceSection from "@/containers/landing-page/price"
 import Audiobooks from "@/containers/landing-page/audiobooks"
+import { PRICING } from "@/constants/pricing"
 
 export default function LandingPage() {
   const [isAnnual, setIsAnnual] = useState(false)
@@ -77,7 +78,7 @@ export default function LandingPage() {
           </button>
         </div>
 
-        <PriceSection isAnnual={isAnnual} />
+        <PriceSection pricing={PRICING} isAnnual={isAnnual} />
       </div>
     </main>
   )
