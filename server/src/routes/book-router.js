@@ -15,6 +15,7 @@ import {
 const router = Router();
 
 router.get("/", checkToken, getAllBooks); // basic && premium [checkToken??]
+router.get("/landing", getAllBooks); // all
 router.get("/:id", checkRole, getBook); // basic || premium --- basic && premium
 router.post("/", isAdmin, createBookController); // admin
 router.patch("/:id", isAdmin, updateBook); // admin
