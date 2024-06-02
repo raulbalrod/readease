@@ -38,6 +38,11 @@ export async function getUserByName(username) {
   return user;
 }
 
+export async function getUserByNameToLogin(username) {
+  const user = await User.findOne({ username });
+  return user;
+}
+
 export async function getUsers(filters) {
   const { name } = filters;
   const query = {
