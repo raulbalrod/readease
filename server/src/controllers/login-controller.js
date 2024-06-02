@@ -2,13 +2,13 @@ import { HttpStatusError } from "common-errors";
 import jwt from "jsonwebtoken";
 
 import config from "../config.js";
-import { getUserByName } from "../services/database/user-db-service.js";
+import { getUserByNameToLogin } from "../services/database/user-db-service.js";
 import { checkHash } from "../utils/encrypt.js";
 
 export async function login(req, res, next) {
   try {
     const { username, password } = req.body;
-    const user = await getUserByName(username);
+    const user = await getUserByNameToLogin(username);
 
     if (!user || !checkHash(password, user.password)) {
       throw new HttpStatusError(401, "Invalid username or password");
