@@ -34,7 +34,7 @@ export async function changeRole(id, newRole) {
 }
 
 export async function getUserByName(username) {
-  const user = await User.findOne({ username });
+  const user = await User.findOne({ username }).select("-password");
   return user;
 }
 

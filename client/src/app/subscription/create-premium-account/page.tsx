@@ -39,8 +39,7 @@ export default function PremiumSubscriptionPage() {
 
     if (response.ok) {
       localStorage.setItem("token", result.token)
-      console.log("Login exitoso. Token guardado.")
-      router.push("/landing-page")
+      router.push("/home")
     } else {
       console.error("Error en el login: ", result.message)
     }
