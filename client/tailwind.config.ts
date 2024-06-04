@@ -22,6 +22,8 @@ const config: Config = {
           "linear-gradient(40deg, #19162b 5%, #332b55 15%, #4c4180 65%, #332b55 80%, #19162b 110%)",
         "paymentype-linear":
           "linear-gradient(40deg, #604e06 5%, #302703 15%, #030328 45%, #332b55 120%)",
+        "newbooks-linear":
+          "linear-gradient(100deg, #19162b 5%, #332b55 15%, #4c4180 25%, #6656aa 80%, #4c4180 90%, #19162b 100%)",
       },
       colors: {
         primary: "#030328",
@@ -30,6 +32,14 @@ const config: Config = {
         neutral: "#F2F2F2",
       },
       keyframes: {
+        marquee: {
+          from: { transform: "translateX(0)" },
+          to: { transform: "translateX(calc(-100% - var(--gap)))" },
+        },
+        "marquee-vertical": {
+          from: { transform: "translateY(0)" },
+          to: { transform: "translateY(calc(-100% - var(--gap)))" },
+        },
         "accordion-down": {
           from: { height: "0" },
           to: { height: "var(--radix-accordion-content-height)" },
@@ -42,6 +52,8 @@ const config: Config = {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        marquee: "marquee var(--duration) linear infinite",
+        "marquee-vertical": "marquee-vertical var(--duration) linear infinite",
       },
     },
   },

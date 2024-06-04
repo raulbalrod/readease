@@ -14,9 +14,11 @@ import {
 } from "@/components/Form"
 import { Input } from "@/components/Input"
 import { Button } from "@/components/Button/ActionButton"
+import { useAuth } from "@/contexts/AuthContext"
 
 export default function SignInPage() {
   const router = useRouter()
+  const { setAuthData } = useAuth()
   const form = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
@@ -41,6 +43,8 @@ export default function SignInPage() {
 
     if (response.ok) {
       localStorage.setItem("token", result.token)
+      localStorage.setItem("username", data.username)
+      setAuthData(result.token, data.username)
       router.push("/home")
     } else {
       console.error("Error en el login: ", result.message)

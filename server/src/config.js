@@ -2,6 +2,7 @@ import "dotenv/config";
 
 const config = {
   port: process.env.PORT || 8080,
+  deployUrl: process.env.API_URL,
   app: {
     secretKey: process.env.SECRET_KEY,
   },

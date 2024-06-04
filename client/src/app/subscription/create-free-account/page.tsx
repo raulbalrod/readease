@@ -8,9 +8,11 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { AccountSchema } from "@/models/createAccount"
 import FormSubscription from "@/containers/subscription/FormSubscription"
 import LoaderSubscription from "../laoder"
+import { useAuth } from "@/contexts/AuthContext"
 
 export default function FreeSubscriptionPage() {
   const router = useRouter()
+  const { setAuthData } = useAuth()
   const [isLoading, setIsLoading] = useState(false)
   const form = useForm<z.infer<typeof AccountSchema>>({
     resolver: zodResolver(AccountSchema),
@@ -39,6 +41,8 @@ export default function FreeSubscriptionPage() {
 
     if (response.ok) {
       localStorage.setItem("token", result.token)
+      localStorage.setItem("username", data.username)
+      setAuthData(result.token, data.username)
       router.push("/home")
     } else {
       console.error("Error en el login: ", result.message)
