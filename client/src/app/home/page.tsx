@@ -117,7 +117,7 @@ export default function HomePage() {
         ) : (
           <>
             <div className="flex items-center">
-              <h1 className="font-semibold m-4 text-lg">
+              <h1 className="font-semibold m-4 text-2xl">
                 Books for {username}
               </h1>
             </div>
