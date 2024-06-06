@@ -117,18 +117,14 @@ export default function HomePage() {
         ) : (
           <>
             <div className="flex items-center">
-              <h1 className="font-semibold m-4 text-lg">
+              <h1 className="font-semibold m-4 text-2xl">
                 Books for {username}
               </h1>
             </div>
             <Marquee reverse>
               {books.slice(0, 10).map((book) => (
                 <div key={book._id} className="">
-                  <BookWhitLink
-                    id={book._id}
-                    src={book.image.frontImage}
-                    alt={book.title}
-                  />
+                  <BookWhitLink id={book._id} title={book.title} />
                 </div>
               ))}
             </Marquee>

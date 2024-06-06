@@ -95,11 +95,7 @@ export default function Categorie({
           {books.slice(0, 20).map((book, index) => (
             <CarouselItem key={book._id} className="basis-1/10">
               <div className="p-1">
-                <BookWhitLink
-                  id={book._id}
-                  src={book.image.frontImage}
-                  alt={book.title}
-                />
+                <BookWhitLink id={book._id} title={book.title} />
               </div>
             </CarouselItem>
           ))}

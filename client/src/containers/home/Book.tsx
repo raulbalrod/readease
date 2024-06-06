@@ -1,23 +1,24 @@
-import Image from "next/image"
+import { formatTitle } from "@/utils/formatTitle"
 import Link from "next/link"
 
 interface BookWhitLinkProps {
   id: string
-  src: string
-  alt: string
+  title: string
 }
 
-export default function BookWhitLink({ id, src, alt }: BookWhitLinkProps) {
+export default function BookWhitLink({ id, title }: BookWhitLinkProps) {
   return (
     <Link href={`/book/${id}`}>
-      <Image
-        src={src}
-        alt={alt}
-        width={130}
-        height={200}
-        style={{ width: "auto" }}
-        priority={true}
-      />
+      <div
+        className="relative flex flex-col items-center justify-center gap-4 bg-cover bg-center text-neutral"
+        style={{
+          backgroundImage: `url('/books/${formatTitle(title)}.jpg')`,
+          width: 300,
+          height: 460,
+        }}
+      >
+        <div className="absolute inset-0"></div>
+      </div>
     </Link>
   )
 }
