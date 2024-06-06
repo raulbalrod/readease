@@ -124,11 +124,7 @@ export default function HomePage() {
             <Marquee reverse>
               {books.slice(0, 10).map((book) => (
                 <div key={book._id} className="">
-                  <BookWhitLink
-                    id={book._id}
-                    src={book.image.frontImage}
-                    alt={book.title}
-                  />
+                  <BookWhitLink id={book._id} title={book.title} />
                 </div>
               ))}
             </Marquee>
