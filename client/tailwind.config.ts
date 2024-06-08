@@ -14,6 +14,10 @@ const config: Config = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
         "custom-linear":
           "linear-gradient(40deg, #24264499 10%, #030328 35%, #7F6CD5 75%, #7F6CD5 120%)",
+        "ebook-linear":
+          "linear-gradient(70deg, #24264499 10%, #332b55 35%, #7F6CD5 75%, #7F6CD5 120%)",
+        "audiobook-linear":
+          "linear-gradient(70deg, #7F6CD5 10%, #7F6CD5 35%, #332b55 75%, #24264499 120%)",
         "login-linear":
           "linear-gradient(210deg, #292244 10%, #3d3466 45%, #524588 60%, #6656aa 120%)",
         "bg-linear":
