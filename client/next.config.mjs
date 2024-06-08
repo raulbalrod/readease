@@ -8,6 +8,7 @@ const nextConfig = {
       "hips.hearstapps.com",
       "medios.lamarmota.es",
       "unavatar.io",
+      "upload.wikimedia.org",
     ],
   },
 }

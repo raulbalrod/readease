@@ -11,6 +11,7 @@ const buttonVariants = cva(
       variant: {
         default: "bg-accent hover:bg-[#573dcc] w-full font-medium text-lg",
         secondary: "bg-secondary hover:bg-[#604e06] w-full font-medium text-lg",
+        ghost: "hover:text-secondary",
       },
       size: {
         default: "h-10 px-4 py-2",

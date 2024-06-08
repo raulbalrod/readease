@@ -1,10 +1,12 @@
 "use client"
 
-import Image from "next/image"
 import { useEffect, useState } from "react"
-import Link from "next/link"
 import { useParams } from "next/navigation"
 import { BookTypes } from "@/types/books"
+import LoaderBookPage from "@/containers/book/Loader"
+import BookDetails from "@/containers/book/BookDetails"
+import ModalBook from "@/containers/book/Modal"
+import { renderRating } from "@/containers/book/RatingBook"
 
 export default function BookPage() {
   const { id } = useParams()
@@ -12,6 +14,10 @@ export default function BookPage() {
   const [book, setBook] = useState<BookTypes | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [showFullDescription, setShowFullDescription] = useState(false)
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [modalContent, setModalContent] = useState(null)
+  const toggleDescription = () => setShowFullDescription(!showFullDescription)
 
   useEffect(() => {
     const fetchBook = async () => {
@@ -39,41 +45,53 @@ export default function BookPage() {
     fetchBook()
   }, [id, token])
 
+  const toggleModal = (content: any) => {
+    setModalContent(content)
+    setIsModalOpen(!isModalOpen)
+  }
+
   return (
-    <main className="flex flex-col items-start overflow-hidden bg-newbooks-linear py-2">
+    <main className="flex flex-col items-start overflow-hidden py-2">
       <section className="flex justify-center items-center w-full">
         {loading ? (
-          <p>
-            <i className="bx bx-loader-alt bx-spin bx-lg"></i>
-          </p>
+          <section className="w-full flex md:flex-row flex-col justify-between md:space-x-10 space-y-4 p-10">
+            <LoaderBookPage />
+          </section>
         ) : error ? (
           <p>Error: {error}</p>
         ) : (
           book && (
-            <div key={book._id}>
-              <Link href={`/book/${book._id}`}>
-                <Image
-                  src={book.image.frontImage}
-                  alt={book.title}
-                  width={150}
-                  height={200}
-                  style={{ width: "auto" }}
-                  priority={true}
+            <div key={book._id} className="w-full">
+              <section className="w-full flex md:flex-row flex-col justify-between md:space-x-10 space-y-4 p-10">
+                <BookDetails
+                  _id={book._id}
+                  title={book.title}
+                  subtitle={book.subtitle}
+                  rating={book.rating}
+                  categories={book.categories}
+                  description={book.description}
+                  img={book.authors.img}
+                  name={book.authors.name}
+                  renderRating={renderRating}
+                  toggleModal={toggleModal}
+                  toggleDescription={toggleDescription}
+                  showFullDescription={showFullDescription}
                 />
-              </Link>
-              <h2>{book.title}</h2>
-              <p>{book.subtitle}</p>
-              <p>{book.description}</p>
-              <p>Categorías: {book.categories.join(", ")}</p>
-              <p>Rating: {book.rating}</p>
-              <p>Status: {book.status}</p>
-              <div>
-                <h3>Autores:</h3>
-              </div>
-              <p>Editorial: {book.editorial}</p>
-              <p>Page Count: {book.pageCount}</p>
-              <p>Ebook: {book.ebook}</p>
-              <p>Audiobook: {book.audiobook}</p>
+              </section>
+
+              {isModalOpen && (
+                <div className="fixed top-0 left-0 w-screen h-screen z-50 flex justify-center items-center bg-primary/95">
+                  <ModalBook
+                    title={book.title}
+                    ebook={book.ebook}
+                    frontImage={book.image.frontImage}
+                    name={book.authors.name}
+                    audiobook={book.audiobook}
+                    toggleModal={toggleModal}
+                    modalContent={modalContent}
+                  />
+                </div>
+              )}
             </div>
           )
         )}

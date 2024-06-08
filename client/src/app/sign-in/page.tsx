@@ -15,6 +15,7 @@ import {
 import { Input } from "@/components/Input"
 import { Button } from "@/components/Button/ActionButton"
 import { useAuth } from "@/contexts/AuthContext"
+import Link from "next/link"
 
 export default function SignInPage() {
   const router = useRouter()
@@ -52,48 +53,61 @@ export default function SignInPage() {
   }
 
   return (
-    <main className="flex min-h-[65vh] flex-col items-center justify-center bg-bg-linear py-40">
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 w-96">
-          <FormField
-            control={form.control}
-            name="username"
-            render={({ field }) => (
-              <FormItem>
-                <FormControl>
-                  <Input
-                    variant="signin"
-                    type="text"
-                    placeholder="Username"
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="password"
-            render={({ field }) => (
-              <FormItem>
-                <FormControl>
-                  <Input
-                    variant="signin"
-                    type="password"
-                    placeholder="Password"
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <Button variant="default" type="submit">
-            Submit
-          </Button>
-        </form>
-      </Form>
+    <main className="flex min-h-[65vh] flex-col items-center justify-center md:gap-6 bg-bg-linear py-40">
+      <h5 className="md:text-3xl text-2xl font-semibold">Sign in</h5>
+      <div className="md:p-16 md:border md:border-neutral/60 md:bg-login-linear rounded-xl md:shadow-lg md:scale-100 scale-75">
+        <Form {...form}>
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className="space-y-8 w-96"
+          >
+            <FormField
+              control={form.control}
+              name="username"
+              render={({ field }) => (
+                <FormItem>
+                  <FormControl>
+                    <Input
+                      variant="signin"
+                      type="text"
+                      placeholder="Username"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="password"
+              render={({ field }) => (
+                <FormItem>
+                  <FormControl>
+                    <Input
+                      variant="signin"
+                      type="password"
+                      placeholder="Password"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <div className="flex items-center gap-4 w-full">
+              <div className="w-1/3">
+                <Button variant="default" type="submit">
+                  Sign in
+                </Button>
+              </div>
+              <Link href="subscription" className="hover:underline">
+                Do you need an account?
+              </Link>
+            </div>
+          </form>
+        </Form>
+      </div>
     </main>
   )
 }
