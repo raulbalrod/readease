@@ -14,6 +14,8 @@ export default function BookDetails({
   toggleDescription,
   img,
   name,
+  isBookmarked,
+  handleBookmarkClick,
 }: any) {
   return (
     <>
@@ -22,7 +24,7 @@ export default function BookDetails({
       </div>
 
       <div className="md:w-2/3 flex flex-col space-y-3">
-        <div className=" w-full flex  md:flex-row flex-col justify-between">
+        <div className="w-full flex md:flex-row flex-col justify-between">
           <h1 className="text-secondary font-semibold text-xl">{title}</h1>
           <p>{renderRating(rating)}</p>
         </div>
@@ -41,18 +43,23 @@ export default function BookDetails({
 
         <section className="flex space-x-4 items-center">
           <div
-            className="w-fit p-1 px-4 text-lg bg-ebook-linear rounded-xl font-semibold  cursor-pointer"
+            className="w-fit p-1 px-4 text-lg bg-ebook-linear rounded-xl font-semibold cursor-pointer"
             onClick={() => toggleModal("ebook")}
           >
             Ebook
           </div>
           <div
-            className="w-fit p-1 px-4 text-lg bg-audiobook-linear rounded-xl font-semibold  cursor-pointer"
+            className="w-fit p-1 px-4 text-lg bg-audiobook-linear rounded-xl font-semibold cursor-pointer"
             onClick={() => toggleModal("audiobook")}
           >
             Audiobook
           </div>
-          <i className="bx bx-bookmarks bx-sm hover:text-neutral/80 cursor-pointer"></i>
+          <i
+            className={`bx ${
+              isBookmarked ? "bxs-bookmarks" : "bx-bookmarks"
+            } hover:text-neutral/80 cursor-pointer bx-sm`}
+            onClick={handleBookmarkClick}
+          ></i>
         </section>
 
         <div>
