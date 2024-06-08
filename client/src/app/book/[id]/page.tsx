@@ -7,17 +7,48 @@ import LoaderBookPage from "@/containers/book/Loader"
 import BookDetails from "@/containers/book/BookDetails"
 import ModalBook from "@/containers/book/Modal"
 import { renderRating } from "@/containers/book/RatingBook"
+import { useAuth } from "@/contexts/AuthContext"
+import { UserDataTypes } from "@/types/user"
 
 export default function BookPage() {
   const { id } = useParams()
-  const token = localStorage.getItem("token")
+  const { token, username } = useAuth()
+  const [userData, setUserData] = useState<UserDataTypes | null>(null)
   const [book, setBook] = useState<BookTypes | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [showFullDescription, setShowFullDescription] = useState(false)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [modalContent, setModalContent] = useState(null)
+  const [isBookmarked, setIsBookmarked] = useState(false)
   const toggleDescription = () => setShowFullDescription(!showFullDescription)
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      if (!token) return
+      try {
+        const response = await fetch(
+          `https://bookbuddy-v7ra.onrender.com/v1/users/me`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          },
+        )
+        if (!response.ok) {
+          throw new Error("Error fetching user data")
+        }
+        const data = await response.json()
+        setUserData(data)
+      } catch (err: any) {
+        setError(err.message)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchUserData()
+  }, [token, username])
 
   useEffect(() => {
     const fetchBook = async () => {
@@ -42,12 +73,60 @@ export default function BookPage() {
       }
     }
 
+    const checkIfBookmarked = async () => {
+      try {
+        const response = await fetch(
+          `https://bookbuddy-v7ra.onrender.com/v1/users/${username}/books`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          },
+        )
+        if (!response.ok) {
+          throw new Error("Error al verificar el libro")
+        }
+        const data = await response.json()
+        const isBookmarked = data.some((book: any) => book._id === id)
+        setIsBookmarked(isBookmarked)
+      } catch (error: any) {
+        setError(error.message)
+      }
+    }
+
     fetchBook()
-  }, [id, token])
+    checkIfBookmarked()
+  }, [id, token, username])
 
   const toggleModal = (content: any) => {
     setModalContent(content)
     setIsModalOpen(!isModalOpen)
+  }
+
+  const handleBookmarkClick = async () => {
+    try {
+      const response = await fetch(
+        `https://bookbuddy-v7ra.onrender.com/v1/users/${userData?._id}/books${
+          isBookmarked ? "/remove" : ""
+        }`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ bookId: id }),
+        },
+      )
+
+      if (!response.ok) {
+        throw new Error("Error al actualizar el estado del libro")
+      }
+
+      setIsBookmarked(!isBookmarked)
+    } catch (error: any) {
+      setError(error.message)
+    }
   }
 
   return (
@@ -76,6 +155,8 @@ export default function BookPage() {
                   toggleModal={toggleModal}
                   toggleDescription={toggleDescription}
                   showFullDescription={showFullDescription}
+                  isBookmarked={isBookmarked}
+                  handleBookmarkClick={handleBookmarkClick}
                 />
               </section>
 
