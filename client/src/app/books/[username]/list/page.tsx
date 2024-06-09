@@ -30,20 +30,23 @@ export default function UserBookListPage() {
         const data = await response.json()
         setUserData(data)
 
-        const bookRequests = data.bookList.map(async (book: any) => {
-          const bookResponse = await fetch(
-            `https://bookbuddy-v7ra.onrender.com/v1/books/${book._id}`,
-            {
-              headers: {
-                Authorization: `Bearer ${token}`,
+        const bookList = data.bookList || []
+        const bookRequests = bookList
+          .filter((book: any) => book && book._id)
+          .map(async (book: any) => {
+            const bookResponse = await fetch(
+              `https://bookbuddy-v7ra.onrender.com/v1/books/${book._id}`,
+              {
+                headers: {
+                  Authorization: `Bearer ${token}`,
+                },
               },
-            },
-          )
-          if (!bookResponse.ok) {
-            throw new Error("Error fetching book data")
-          }
-          return bookResponse.json()
-        })
+            )
+            if (!bookResponse.ok) {
+              throw new Error("Error fetching book data")
+            }
+            return bookResponse.json()
+          })
 
         const booksData = await Promise.all(bookRequests)
         setBooks(booksData)
@@ -76,7 +79,7 @@ export default function UserBookListPage() {
 
           <h2>Books:</h2>
           <ul>
-            {books.map((book) => (
+            {books.map((book: any) => (
               <li key={book._id}>
                 <p>Id: {book._id}</p>
                 <p>Title: {book.title}</p>
