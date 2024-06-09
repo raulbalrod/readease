@@ -9,6 +9,8 @@ const nextConfig = {
       "medios.lamarmota.es",
       "unavatar.io",
       "upload.wikimedia.org",
+      "pymstatic.com",
+      "www.biografiasyvidas.com",
     ],
   },
 }
