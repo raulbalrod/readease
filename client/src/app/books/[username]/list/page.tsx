@@ -168,7 +168,7 @@ export default function UserBookListPage() {
 
   return (
     <main>
-      <section className="flex justify-between items-center px-6 mb-32">
+      <section className="flex md:flex-row flex-col md:justify-between md:items-center items-start gap-2 px-6 mb-32">
         <h1 className="text-2xl font-bold">My list</h1>
 
         <div className="flex items-center space-x-4">

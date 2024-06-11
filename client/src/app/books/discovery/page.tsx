@@ -121,7 +121,7 @@ export default function BooksDiscoveryPage() {
     <main className="flex min-h-screen flex-col items-center justify-center">
       {loading ? (
         <>
-          <section className="w-full flex justify-between items-center px-6 mb-10">
+          <section className="w-full flex md:flex-row flex-col md:justify-between md:items-center items-start gap-2 px-6 mb-32">
             <Skeleton className="h-[24px] w-[300px] rounded-xl bg-neutral/10" />
             <div className="flex gap-2">
               <Skeleton className="h-[20px] w-[150px] rounded-xl bg-neutral/10" />
@@ -153,7 +153,7 @@ export default function BooksDiscoveryPage() {
         </>
       ) : (
         <>
-          <section className="w-full flex justify-between items-center px-6 mb-32">
+          <section className="w-full flex md:flex-row flex-col md:justify-between md:items-center items-start gap-2 px-6 mb-32">
             <h1 className="text-2xl font-bold">Explore by categories</h1>
 
             <div className="flex items-center space-x-4">
