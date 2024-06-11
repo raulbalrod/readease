@@ -168,7 +168,7 @@ export default function UserBookListPage() {
 
   return (
     <main>
-      <section className="flex justify-between items-center px-6 mb-32">
+      <section className="flex md:flex-row flex-col md:justify-between md:items-center items-start gap-2 px-6 mb-32">
         <h1 className="text-2xl font-bold">My list</h1>
 
         <div className="flex items-center space-x-4">
@@ -198,7 +198,7 @@ export default function UserBookListPage() {
             </SelectContent>
           </Select>
 
-          <div className="flex items-center gap-2 ml-4">
+          <div className="hidden md:flex items-center gap-2 ml-4">
             <p className="text-sm md:text-base font-bold ">Order by</p>
             <Select onValueChange={(value) => setOrderBy(value)}>
               <SelectTrigger className="w-fit">
@@ -217,7 +217,7 @@ export default function UserBookListPage() {
         </div>
       </section>
 
-      <section className="flex flex-wrap gap-4 justify-between p-6">
+      <section className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6">
         {books.map((book) => (
           <div
             key={book._id}

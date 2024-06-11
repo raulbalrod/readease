@@ -1,4 +1,4 @@
-import { LEGAL_LINK } from "@/constants/legals"
+// import { LEGAL_LINK } from "@/constants/legals"
 import { SOCIAL_MEDIA } from "@/constants/rrss"
 
 export default function Footer() {
@@ -7,7 +7,7 @@ export default function Footer() {
       <ul className="flex gap-5">
         {SOCIAL_MEDIA.map((rs) => (
           <li key={rs.name}>
-            <a href={rs.link}>
+            <a href={rs.link} target="_blank">
               <i
                 className={`bx ${rs.logo} bx-md text-neutral hover:text-neutral/85`}
               ></i>
@@ -15,7 +15,7 @@ export default function Footer() {
           </li>
         ))}
       </ul>
-      <ul className="flex md:flex-row flex-col gap-5">
+      {/* <ul className="flex md:flex-row flex-col gap-5">
         {LEGAL_LINK.map((rs) => (
           <li
             key={rs.name}
@@ -26,7 +26,7 @@ export default function Footer() {
             </a>
           </li>
         ))}
-      </ul>
+      </ul> */}
       <span className="text-neutral text-center md:w-full w-3/4">
         ©2023 BookBudy SA. All Rights Reserved Bookbuddy™ is used under license.
       </span>
