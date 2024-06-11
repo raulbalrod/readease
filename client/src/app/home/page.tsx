@@ -129,7 +129,11 @@ export default function HomePage() {
               ))}
             </Marquee>
             <div className="w-full flex justify-center p-4">
-              <Button text="All books" path="/books" variant="default" />
+              <Button
+                text="All books"
+                path="/books/discovery"
+                variant="default"
+              />
             </div>
           </>
         )}
