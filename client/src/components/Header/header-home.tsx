@@ -97,6 +97,9 @@ const HeaderHomePage: React.FC = () => {
       </a>
 
       <section className="flex items-center gap-6">
+        <a href="/books/discovery" className="block md:hidden">
+          <i className="bx bx-search-alt bx-sm hover:text-neutral/80 cursor-pointer block md:hidden"></i>
+        </a>
         <i
           onClick={handleNavigation}
           className="bx bx-bookmarks bx-sm hover:text-neutral/80 cursor-pointer"

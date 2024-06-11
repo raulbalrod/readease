@@ -62,6 +62,7 @@ const HeaderBookPage: React.FC = () => {
     logout()
     router.push("/landing-page")
   }
+
   return (
     <header className="flex items-center justify-between bg-primary w-screen py-6 px-10 z-50">
       <nav className="hidden md:flex items-center gap-10">
@@ -96,6 +97,9 @@ const HeaderBookPage: React.FC = () => {
       </a>
 
       <section className="flex items-center gap-6">
+        <a href="/books/discovery" className="block md:hidden">
+          <i className="bx bx-search-alt bx-sm hover:text-neutral/80 cursor-pointer block md:hidden"></i>
+        </a>
         <i
           onClick={handleNavigation}
           className="bx bx-bookmarks bx-sm hover:text-neutral/80 cursor-pointer"
