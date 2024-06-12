@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { useParams } from "next/navigation"
+import { useParams, useRouter } from "next/navigation"
 import { BookTypes } from "@/types/books"
 import { useAuth } from "@/contexts/AuthContext"
 import { UserDataTypes } from "@/types/user"
@@ -12,6 +12,7 @@ import BookWhitLink from "@/containers/home/Book"
 import Image from "next/image"
 
 export default function BookPage() {
+  const router = useRouter()
   const { id } = useParams()
   const { token, username } = useAuth()
   const [userData, setUserData] = useState<UserDataTypes | null>(null)
@@ -23,6 +24,15 @@ export default function BookPage() {
   const [modalContent, setModalContent] = useState(null)
   const [isBookmarked, setIsBookmarked] = useState(false)
   const toggleDescription = () => setShowFullDescription(!showFullDescription)
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const storedToken = localStorage.getItem("token")
+      if (!storedToken) {
+        router.push("/sign-in")
+      }
+    }
+  }, [router])
 
   useEffect(() => {
     const fetchUserData = async () => {

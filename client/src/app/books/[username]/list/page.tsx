@@ -11,8 +11,10 @@ import {
   SelectValue,
 } from "@/components/Select"
 import BookImageWhitLink from "@/containers/mylist/BookImage"
+import { useRouter } from "next/navigation"
 
 export default function UserBookListPage() {
+  const router = useRouter()
   const { token, username } = useAuth()
   const [userData, setUserData] = useState<UserDataTypes | null>(null)
   const [books, setBooks] = useState<
@@ -24,6 +26,15 @@ export default function UserBookListPage() {
   const [filterCategory, setFilterCategory] = useState<string>("All")
   const [orderBy, setOrderBy] = useState<string>("default")
   const [categories, setCategories] = useState<string[]>([])
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const storedToken = localStorage.getItem("token")
+      if (!storedToken) {
+        router.push("/sign-in")
+      }
+    }
+  }, [router])
 
   useEffect(() => {
     const fetchUserData = async () => {
