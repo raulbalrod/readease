@@ -44,7 +44,7 @@ This project uses the following technologies:
 
 ```
 Bookbuddy
-client
+📦client
  ┣ 📂public # Public assets
  ┣ 📂src
  ┃ ┣ 📂app # Routes pages
