@@ -49,7 +49,7 @@ client
  ┃ ┗ 📜index.js # App launcher
  ┣ 📜next.config.mjs   
  ┣ 📜tailwind.config.ts  
- ┣ 📜tsconfig.ts         
+ ┣ 📜tsconfig.json        
  ┣ 📜.gitignore         
  ┣ 📜package.json        
  ┣ 📜package-lock.json   
