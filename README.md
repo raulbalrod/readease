@@ -190,7 +190,7 @@ router.post("/:id/books/remove", checkTokenOwnUser removeBookFromListController)
 Please feel free to send pull request if you want to contribute!
 
 # BUGs or comments
-[Create new Issues]() (preferred) or email me: [raulballesterorodriguez@gmail.com](mailto:raulballesterorodriguez@gmail.com)
+[Create new Issues](https://github.com/raulbalrod/bookbuddy/issues) (preferred) or email me: [raulballesterorodriguez@gmail.com](mailto:raulballesterorodriguez@gmail.com)
 
 # Version
 1.0.0
