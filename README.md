@@ -1,12 +1,12 @@
-# Bookbuddy
+# ReadEase
 
-Bookbuddy is an application that allows you to categorize books into lists. It helps you keep track of books you have read, want to read, or are currently reading. Additionally, if you are a premium user, you have access to read the ebook and listen to the audiobook.
+ReadEase is an application that allows you to categorize books into lists. It helps you keep track of books you have read, want to read, or are currently reading. Additionally, if you are a premium user, you have access to read the ebook and listen to the audiobook.
 
 ![Initial content web](docs/web-preview.png)
 
 # Table of Contents
 
-- [Bookbuddy](#bookbuddy)
+- [ReadEase](#ReadEase)
 - [Table of Contents](#table-of-contents)
 - [Technologies](#technologies)
 - [File Structure](#file-structure)
@@ -43,7 +43,7 @@ This project uses the following technologies:
 # File Structure
 
 ```
-Bookbuddy
+ReadEase
 📦client
  ┣ 📂public # Public assets
  ┣ 📂src
@@ -109,7 +109,7 @@ SECRET_KEY=1234
 1. Fork, then download or clone the repo.
 
 ```
-https://github.com/raulbalrod/bookbuddy.git
+https://github.com/raulbalrod/readease.git
 ```
 
 2. Make sure MongoDB service is running.
@@ -190,7 +190,7 @@ router.post("/:id/books/remove", checkTokenOwnUser removeBookFromListController)
 Please feel free to send pull request if you want to contribute!
 
 # BUGs or comments
-[Create new Issues](https://github.com/raulbalrod/bookbuddy/issues) (preferred) or email me: [raulballesterorodriguez@gmail.com](mailto:raulballesterorodriguez@gmail.com)
+[Create new Issues](https://github.com/raulbalrod/readease/issues) (preferred) or email me: [raulballesterorodriguez@gmail.com](mailto:raulballesterorodriguez@gmail.com)
 
 # Version
 1.0.0
