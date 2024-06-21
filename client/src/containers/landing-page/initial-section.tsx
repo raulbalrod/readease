@@ -5,14 +5,14 @@ export default function InitialSectionContainer() {
   return (
     <>
       <Image
-        src="/bookbuddy/whithout-title/logo-v2.svg"
-        alt="Logo Bookbuddy"
+        src="/readease/whithout-title/logo-v2.svg"
+        alt="Logo readease"
         width="128"
         height="128"
         className="z-10"
       />
       <h3 className="relative w-96 text-center font-medium text-xl">
-        In <span className="text-secondary font-bold">Bookbuddy</span>, you'll
+        In <span className="text-secondary font-bold">ReadEase</span>, you'll
         find a collection of bestselling{" "}
         <span className="text-secondary font-bold">ebooks</span>, award-winning{" "}
         <span className="text-secondary font-bold">audiobooks</span>, and much

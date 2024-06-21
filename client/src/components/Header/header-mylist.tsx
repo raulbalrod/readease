@@ -69,8 +69,8 @@ const HeaderMyListPage: React.FC = () => {
         <div>
           <a href="/home">
             <Image
-              src="/bookbuddy/whithout-title/logo.svg"
-              alt="logo bookbuddy"
+              src="/readease/whithout-title/logo.svg"
+              alt="logo readease"
               width="58"
               height="58"
             />
@@ -88,8 +88,8 @@ const HeaderMyListPage: React.FC = () => {
 
       <a href="/home">
         <Image
-          src="/bookbuddy/whithout-title/logo.svg"
-          alt="logo bookbuddy"
+          src="/readease/whithout-title/logo.svg"
+          alt="logo readease"
           width="50"
           height="50"
           className="block md:hidden"

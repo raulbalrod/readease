@@ -28,7 +28,7 @@ export default function Footer() {
         ))}
       </ul> */}
       <span className="text-neutral text-center md:w-full w-3/4">
-        ©2023 BookBudy SA. All Rights Reserved Bookbuddy™ is used under license.
+        ©2023 ReadEase SA. All Rights Reserved ReadEase™ is used under license.
       </span>
     </footer>
   )

@@ -6,10 +6,10 @@ export default async function (config) {
 
   try {
     await mongoose.connect(url);
-    logger.info(`Connect to MongoDB at bookbuddy database 👌`);
+    logger.info(`Connect to MongoDB at readease database 👌`);
   } catch (err) {
     logger.error(
-      `Error conecting to MongoDB at bookbuddy database 👎.\n ${err}`
+      `Error conecting to MongoDB at readease database 👎.\n ${err}`
     );
   }
 }

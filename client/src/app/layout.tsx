@@ -7,9 +7,9 @@ import { AuthProvider } from "@/contexts/AuthContext"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "BookBuddy | Your Reading Companion",
+  title: "ReadEase | Your Reading Companion",
   description:
-    "Discover a new way to enjoy reading with BookBuddy, the ultimate app for book lovers. With BookBuddy, you have access to a wide selection of books in eBook and audiobook formats, so you can read or listen to your favorite titles anytime, anywhere.",
+    "Discover a new way to enjoy reading with ReadEase, the ultimate app for book lovers. With ReadEase, you have access to a wide selection of books in eBook and audiobook formats, so you can read or listen to your favorite titles anytime, anywhere.",
 }
 
 export default function RootLayout({

@@ -23,8 +23,8 @@ export default function HeaderLandingPage() {
       <nav className="hidden md:flex items-center gap-10">
         <div>
           <Image
-            src="/bookbuddy/whithout-title/logo.svg"
-            alt="logo bookbuddy"
+            src="/readease/whithout-title/logo.svg"
+            alt="logo ReadEase"
             width="64"
             height="64"
           />
@@ -74,8 +74,8 @@ export default function HeaderLandingPage() {
       </nav>
 
       <Image
-        src="/bookbuddy/whithout-title/logo.svg"
-        alt="logo bookbuddy"
+        src="/readease/whithout-title/logo.svg"
+        alt="logo readease"
         width="50"
         height="50"
         className="block 

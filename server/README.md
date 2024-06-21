@@ -1,12 +1,12 @@
-# Bookbuddy API REST
-API REST in Nodejs for a bookbuddy project
+# ReadEase API REST
+API REST in Nodejs for a readease project
 
 ## Instalation
 
 1. Download or clone this repo
 
 ```bash
-git clone https://github.com/raulbalrod/bookbuddy.git
+git clone https://github.com/raulbalrod/readease.git
 ```
 
 ```bash
@@ -19,7 +19,7 @@ cd server
 npm install
 ```
 
-> You must insert your port, expiresIn and username Bookbuddy API password on variable.
+> You must insert your port, expiresIn and username ReadEase API password on variable.
 
 3. Simply run on your local
 

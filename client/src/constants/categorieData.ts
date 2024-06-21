@@ -1,5 +1,5 @@
 export const SECTION_HOME_PAGE = ({ username }: any) => [
-  { title: "Only on Bookbuddy", endpoint: "books?sort=za" },
+  { title: "Only on ReadEase", endpoint: "books?sort=za" },
   { title: "Most Popular Books", endpoint: "books?sort=rateDesc" },
   { title: "My List", endpoint: `users/${username}/books` },
   { title: "Books on Philosophy", endpoint: "books?categorie=Filosofía" },
