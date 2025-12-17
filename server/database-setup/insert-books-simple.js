@@ -28,7 +28,7 @@ try {
 }
 
 // Configuración de MongoDB (usa las mismas variables que tu .env)
-const MONGODB_URL = process.env.MONGODB_URL || 'mongodb+srv://raulbalrod_db_user:emR0gZsXOXsL3PjA@readease-project.afa7bgy.mongodb.net/readease?retryWrites=true&w=majority';
+const MONGODB_URL = process.env.MONGODB_URL || 'mongodb://localhost:8080';
 
 async function main() {
   try {

@@ -10,7 +10,7 @@ import Book from './src/models/Book.js';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-const MONGODB_URL = process.env.MONGODB_URL || 'mongodb+srv://raulbalrod_db_user:emR0gZsXOXsL3PjA@readease-project.afa7bgy.mongodb.net/readease?retryWrites=true&w=majority';
+const MONGODB_URL = process.env.MONGODB_URL || 'mongodb://localhost:8080';
 
 async function checkMissingBooks() {
   try {
