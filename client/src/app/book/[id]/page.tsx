@@ -8,6 +8,7 @@ import { UserDataTypes } from "@/types/user"
 import { Skeleton } from "@/components/Skeleton"
 import AudiobookPlayer from "@/components/AudioboookPlayer"
 import { EpubViewer } from "@/components/EpubViewer"
+import { PremiumMessage } from "@/components/PremiumMessage"
 import BookWhitLink from "@/containers/home/Book"
 import Image from "next/image"
 import { API_URLS } from "@/config/api"
@@ -24,6 +25,8 @@ export default function BookPage() {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [modalContent, setModalContent] = useState(null)
   const [isBookmarked, setIsBookmarked] = useState(false)
+  const [showPremiumMessage, setShowPremiumMessage] = useState(false)
+  const [premiumMessageType, setPremiumMessageType] = useState<'ebook' | 'audiobook'>('ebook')
   const toggleDescription = () => setShowFullDescription(!showFullDescription)
 
   useEffect(() => {
@@ -122,6 +125,18 @@ export default function BookPage() {
     setModalContent(content)
     setIsModalOpen(!isModalOpen)
   }
+
+  const handleContentClick = (type: 'ebook' | 'audiobook') => {
+    const hasAccess = type === 'ebook' ? book?.ebook : book?.audiobook
+    
+    if (hasAccess) {
+      toggleModal(type)
+    } else {
+      setPremiumMessageType(type)
+      setShowPremiumMessage(true)
+    }
+  }
+
 
   const handleBookmarkClick = async () => {
     if (!userData || !token) return
@@ -243,14 +258,14 @@ export default function BookPage() {
 
                   <section className="flex items-center gap-2">
                     <div
-                      className="w-fit p-1 px-4 text-lg bg-ebook-linear rounded-xl font-semibold cursor-pointer"
-                      onClick={() => toggleModal("ebook")}
+                      className="w-fit p-1 px-4 text-lg bg-ebook-linear rounded-xl font-semibold cursor-pointer hover:opacity-90 transition-opacity"
+                      onClick={() => handleContentClick("ebook")}
                     >
                       Ebook
                     </div>
                     <div
-                      className="w-fit p-1 px-4 text-lg bg-audiobook-linear rounded-xl font-semibold cursor-pointer"
-                      onClick={() => toggleModal("audiobook")}
+                      className="w-fit p-1 px-4 text-lg bg-audiobook-linear rounded-xl font-semibold cursor-pointer hover:opacity-90 transition-opacity"
+                      onClick={() => handleContentClick("audiobook")}
                     >
                       Audiobook
                     </div>
@@ -319,6 +334,12 @@ export default function BookPage() {
                   </div>
                 </div>
               )}
+
+              <PremiumMessage 
+                isOpen={showPremiumMessage}
+                onClose={() => setShowPremiumMessage(false)}
+                type={premiumMessageType}
+              />
             </div>
           )
         )}
