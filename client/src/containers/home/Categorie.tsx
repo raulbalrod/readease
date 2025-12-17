@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation"
 import BookWhitLink from "@/containers/home/Book"
 import { BookTypes } from "@/types/books"
 import { Carousel, CarouselContent, CarouselItem } from "@/components/Carrousel"
+import { API_URLS } from "@/config/api"
 
 interface CategorieProps {
   title: string
@@ -38,7 +39,7 @@ export default function Categorie({
     const fetchBooks = async () => {
       try {
         const response = await fetch(
-          `https://bookbuddy-v7ra.onrender.com/v1/${endpoint}`,
+          API_URLS.getBooksByEndpoint(endpoint),
           {
             headers: {
               Authorization: `Bearer ${token}`,

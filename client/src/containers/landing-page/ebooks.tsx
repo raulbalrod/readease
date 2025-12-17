@@ -1,5 +1,6 @@
 import Image from "next/image"
 import { useEffect, useState } from "react"
+import { API_URLS } from "@/config/api"
 
 export default function EbooksList() {
   const [ebooks, setEbooks] = useState([])
@@ -7,7 +8,7 @@ export default function EbooksList() {
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch(
-        "https://bookbuddy-v7ra.onrender.com/v1/books/landing?sort=rateDesc",
+        API_URLS.BOOKS_LANDING_SORTED("rateDesc"),
         {
           method: "GET",
           headers: {

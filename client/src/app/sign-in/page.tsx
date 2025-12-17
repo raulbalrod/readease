@@ -16,6 +16,7 @@ import { Input } from "@/components/Input"
 import { Button } from "@/components/Button/ActionButton"
 import { useAuth } from "@/contexts/AuthContext"
 import Link from "next/link"
+import { API_URLS } from "@/config/api"
 
 export default function SignInPage() {
   const router = useRouter()
@@ -30,7 +31,7 @@ export default function SignInPage() {
 
   const onSubmit = async (data: z.infer<typeof loginSchema>) => {
     const response = await fetch(
-      "https://bookbuddy-v7ra.onrender.com/v1/users/login",
+      API_URLS.USER_LOGIN,
       {
         method: "POST",
         headers: {

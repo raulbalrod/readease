@@ -14,6 +14,7 @@ import {
 } from "@/components/Sheet"
 import { Button } from "../Button/ActionButton"
 import { BookTypes } from "@/types/books"
+import { API_URLS } from "@/config/api"
 
 const HeaderMyListPage: React.FC = () => {
   const { token, username, logout } = useAuth()
@@ -26,7 +27,7 @@ const HeaderMyListPage: React.FC = () => {
       if (token && username) {
         try {
           const response = await fetch(
-            `https://bookbuddy-v7ra.onrender.com/v1/users/${username}/books`,
+            API_URLS.getUserBooks(username),
             {
               headers: {
                 Authorization: `Bearer ${token}`,

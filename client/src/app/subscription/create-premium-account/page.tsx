@@ -9,6 +9,7 @@ import { AccountSchema } from "@/models/createAccount"
 import FormSubscription from "@/containers/subscription/FormSubscription"
 import LoaderSubscription from "../laoder"
 import { useAuth } from "@/contexts/AuthContext"
+import { API_URLS } from "@/config/api"
 
 export default function PremiumSubscriptionPage() {
   const router = useRouter()
@@ -26,7 +27,7 @@ export default function PremiumSubscriptionPage() {
   const onSubmit = async (data: z.infer<typeof AccountSchema>) => {
     setIsLoading(true)
     const response = await fetch(
-      "https://bookbuddy-v7ra.onrender.com/v1/users/premiumUser",
+      API_URLS.USER_PREMIUM,
       {
         method: "POST",
         headers: {

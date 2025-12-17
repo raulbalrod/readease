@@ -11,6 +11,7 @@ import { Skeleton } from "@/components/Skeleton"
 import BookWhitLink from "@/containers/home/Book"
 import { useRouter } from "next/navigation"
 import { useState, useEffect } from "react"
+import { API_URLS } from "@/config/api"
 
 export default function BooksDiscoveryPage() {
   const router = useRouter()
@@ -33,7 +34,7 @@ export default function BooksDiscoveryPage() {
   const fetchCategories = async () => {
     try {
       const response = await fetch(
-        `https://bookbuddy-v7ra.onrender.com/v1/books`,
+        API_URLS.BOOKS_BASE,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -68,7 +69,6 @@ export default function BooksDiscoveryPage() {
   const fetchBooks = async (category: string | null, order: string | null) => {
     try {
       setLoading(true)
-      let url = `https://bookbuddy-v7ra.onrender.com/v1/books`
       const params = new URLSearchParams()
       if (category && category !== "All") {
         params.append("categorie", category)
@@ -76,9 +76,7 @@ export default function BooksDiscoveryPage() {
       if (order) {
         params.append("sort", order)
       }
-      if (params.toString()) {
-        url += `?${params.toString()}`
-      }
+      const url = API_URLS.getBooksWithFilters(params.toString())
 
       const response = await fetch(url, {
         headers: {

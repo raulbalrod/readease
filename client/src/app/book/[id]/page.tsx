@@ -10,6 +10,7 @@ import AudiobookPlayer from "@/components/AudioboookPlayer"
 import { EpubViewer } from "@/components/EpubViewer"
 import BookWhitLink from "@/containers/home/Book"
 import Image from "next/image"
+import { API_URLS } from "@/config/api"
 
 export default function BookPage() {
   const router = useRouter()
@@ -39,7 +40,7 @@ export default function BookPage() {
       if (!token) return
       try {
         const response = await fetch(
-          `https://bookbuddy-v7ra.onrender.com/v1/users/me`,
+          `${API_URLS.USERS_BASE}/me`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -65,9 +66,13 @@ export default function BookPage() {
     const fetchBook = async () => {
       if (!id || !token) return
       setLoading(true)
+      
+      // Asegurar que id es string, no array
+      const bookId = Array.isArray(id) ? id[0] : id
+      
       try {
         const response = await fetch(
-          `https://bookbuddy-v7ra.onrender.com/v1/books/${id}`,
+          API_URLS.getBookById(bookId),
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -90,7 +95,7 @@ export default function BookPage() {
       if (!username || !token) return
       try {
         const response = await fetch(
-          `https://bookbuddy-v7ra.onrender.com/v1/users/${username}/books`,
+          API_URLS.getUserBooks(username),
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -101,7 +106,8 @@ export default function BookPage() {
           throw new Error("Error al verificar el libro")
         }
         const data = await response.json()
-        const isBookmarked = data.some((book: any) => book._id === id)
+        const bookId = Array.isArray(id) ? id[0] : id
+        const isBookmarked = data.some((book: any) => book._id === bookId)
         setIsBookmarked(isBookmarked)
       } catch (error: any) {
         setError(error.message)
@@ -119,9 +125,13 @@ export default function BookPage() {
 
   const handleBookmarkClick = async () => {
     if (!userData || !token) return
+    
+    // Asegurar que id es string, no array
+    const bookId = Array.isArray(id) ? id[0] : id
+    
     try {
       const response = await fetch(
-        `https://bookbuddy-v7ra.onrender.com/v1/users/${userData._id}/books${
+        `${API_URLS.USERS_BASE}/${userData._id}/books${
           isBookmarked ? "/remove" : ""
         }`,
         {
@@ -130,7 +140,7 @@ export default function BookPage() {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
-          body: JSON.stringify({ bookId: id }),
+          body: JSON.stringify({ bookId }),
         },
       )
 

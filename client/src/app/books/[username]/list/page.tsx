@@ -12,6 +12,7 @@ import {
 } from "@/components/Select"
 import BookImageWhitLink from "@/containers/mylist/BookImage"
 import { useRouter } from "next/navigation"
+import { API_URLS } from "@/config/api"
 
 export default function UserBookListPage() {
   const router = useRouter()
@@ -41,7 +42,7 @@ export default function UserBookListPage() {
       if (!token) return
       try {
         const response = await fetch(
-          `https://bookbuddy-v7ra.onrender.com/v1/users/me`,
+          `${API_URLS.USERS_BASE}/me`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -59,7 +60,7 @@ export default function UserBookListPage() {
           .filter((book: any) => book && book._id)
           .map(async (book: any) => {
             const bookResponse = await fetch(
-              `https://bookbuddy-v7ra.onrender.com/v1/books/${book._id}`,
+              API_URLS.getBookById(book._id),
               {
                 headers: {
                   Authorization: `Bearer ${token}`,
@@ -140,7 +141,7 @@ export default function UserBookListPage() {
 
     try {
       const response = await fetch(
-        `https://bookbuddy-v7ra.onrender.com/v1/users/${userData?._id}/book`,
+        API_URLS.getUserBook(userData?._id || ''),
         {
           method: "PATCH",
           headers: {

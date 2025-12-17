@@ -12,6 +12,7 @@ import Categorie from "@/containers/home/Categorie"
 import { Skeleton } from "@/components/Skeleton"
 import Section from "@/containers/home/Section"
 import { SECTION_HOME_PAGE } from "@/constants/categorieData"
+import { API_URLS } from "@/config/api"
 
 export default function HomePage() {
   const router = useRouter()
@@ -40,7 +41,7 @@ export default function HomePage() {
       if (token) {
         try {
           const response = await fetch(
-            "https://bookbuddy-v7ra.onrender.com/v1/books",
+            API_URLS.BOOKS_BASE,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -72,7 +73,7 @@ export default function HomePage() {
       if (!token) return
       try {
         const response = await fetch(
-          `https://bookbuddy-v7ra.onrender.com/v1/users/me`,
+          `${API_URLS.USERS_BASE}/me`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
