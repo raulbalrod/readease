@@ -3,17 +3,20 @@ import config from "./config.js";
 import cron from "node-cron";
 import axios from "axios";
 
-const { port, deployUrl } = config;
+const { port } = config;
 
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
 });
 
-cron.schedule("*/14 * * * *", async () => {
+// Cron job simple cada 10 minutos
+cron.schedule("*/10 * * * *", async () => {
   try {
-    const response = await axios.get(`${deployUrl}/books/landing`);
-    console.log(`Ping exitoso a ${deployUrl}: ${response.data}`);
+    // Usar RENDER_EXTERNAL_URL si está disponible, sino API_URL
+    const url = process.env.RENDER_EXTERNAL_URL || config.deployUrl || `http://localhost:${port}`;
+    const response = await axios.get(`${url}/health`, { timeout: 30000 });
+    console.log(`✅ Keep-alive ping successful: ${response.status}`);
   } catch (error) {
-    console.error(`Error al hacer ping: ${error.message}`);
+    console.log(`⚠️ Keep-alive ping failed: ${error.message}`);
   }
 });
