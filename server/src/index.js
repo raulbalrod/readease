@@ -12,8 +12,12 @@ app.listen(port, () => {
 // Cron job simple cada 10 minutos
 cron.schedule("*/10 * * * *", async () => {
   try {
-    // Usar RENDER_EXTERNAL_URL si está disponible, sino API_URL
-    const url = process.env.RENDER_EXTERNAL_URL || config.deployUrl || `http://localhost:${port}`;
+    // Usar API_URL desde variables de entorno
+    const url = config.deployUrl;
+    if (!url) {
+      console.log("⚠️ API_URL no está configurada, omitiendo keep-alive ping");
+      return;
+    }
     const response = await axios.get(`${url}/health`, { timeout: 30000 });
     console.log(`✅ Keep-alive ping successful: ${response.status}`);
   } catch (error) {
